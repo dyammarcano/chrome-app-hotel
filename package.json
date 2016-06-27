@@ -9,8 +9,11 @@
   "main": "index.js",
   "dependencies": {
     "gulp-clean-css": "^2.0.10",
+    "gulp-rename": "^1.2.2",
     "gulp-uglifyjs": "^0.6.2",
-    "jshint": "^2.9.2"
+    "jshint": "^2.9.2",
+    "run-sequence": "^1.2.1",
+    "util": "^0.10.3"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
