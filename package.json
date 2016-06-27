@@ -1,9 +1,14 @@
 {
-  "name": "dashboard",
+  "name": "chrome-app-hotel",
   "version": "1.0.0",
   "description": "",
+  "authors": [
+    "Dyam Marcano <dyam.marcano@gmail.com>"
+  ],
+  "license": "MIT",
   "main": "index.js",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-chrome-manifest": "0.0.13",
     "gulp-clean": "^0.3.2",
@@ -24,10 +29,7 @@
     "jshint-stylish": "^2.2.0",
     "merge2": "^1.0.2"
   },
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
+    "start": "gulp"
+  }
 }
