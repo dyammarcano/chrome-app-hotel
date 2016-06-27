@@ -1,4 +1,4 @@
-particlesJS.load 'particles', 'config/particles.json'
+particlesJS.load 'particles', '../config/particles.json'
 app = angular.module('mainApp', [
   'ngRoute'
   'routeStyles'
@@ -13,17 +13,17 @@ app.config [
   '$routeProvider'
   ($routeProvider) ->
     $routeProvider.when '/',
-      templateUrl: 'views/login.html'
+      templateUrl: 'login.html'
       controller: 'loginController'
-      css: 'styles/login.css'
+      css: '../styles/login.css'
     $routeProvider.when '/dashboard',
       resolve: 'check': ($location, $rootScope) ->
         if !$rootScope.loggedIn
           $location.path '/'
         return
-      templateUrl: 'views/dashboard.html'
+      templateUrl: 'dashboard.html'
       controller: 'dashboardController'
-      css: 'styles/dashboard.css'
+      css: '../styles/dashboard.css'
     $routeProvider.otherwise redirectTo: '/'
     return
 ]

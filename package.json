@@ -7,7 +7,10 @@
   ],
   "license": "MIT",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "gulp-clean-css": "^2.0.10",
+    "jshint": "^2.9.2"
+  },
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-chrome-manifest": "0.0.13",
@@ -19,7 +22,6 @@
     "gulp-html-minifier": "^0.1.8",
     "gulp-imagemin": "^3.0.1",
     "gulp-jshint": "^2.0.1",
-    "gulp-minify-css": "^1.2.4",
     "gulp-minify-html": "^1.0.6",
     "gulp-pug": "^3.0.3",
     "gulp-sourcemaps": "^1.6.0",
