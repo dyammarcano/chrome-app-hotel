@@ -1,1 +1,1 @@
-app = angular.module('mainApp.filters', [])
+angular.module('mainApp.filters', [])

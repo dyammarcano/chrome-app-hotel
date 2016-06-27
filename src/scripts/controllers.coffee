@@ -1,4 +1,4 @@
-app = angular.module('mainApp.controllers', [])
+angular.module('mainApp.controllers', [])
 app.controller 'loginController', ($scope, $timeout, $http, $location, $rootScope) ->
   status = ''
   $rootScope.hideParticles = false

@@ -4,7 +4,7 @@ var coffee     = require('gulp-coffee');
 var stylus     = require('gulp-stylus');
 var concat     = require('gulp-concat');
 var pug        = require('gulp-pug');
-var uglify     = require('gulp-uglify');
+var uglify     = require('gulp-uglifyjs');
 var imagemin   = require('gulp-imagemin');
 var manifest   = require('gulp-chrome-manifest');
 var jshint     = require('gulp-jshint');
@@ -98,7 +98,7 @@ gulp.task('copyDev', function() {
 
 gulp.task('vendors', function() {
   merge2(gulp.src(jsFiles))
-    .pipe(uglify())
+    .pipe(uglify({ mangle: false }))
     .pipe(concat('vendors.js'))
     .pipe(gulp.dest('build/scripts'))
 });
@@ -129,7 +129,7 @@ gulp.task('pugDev', function() {
 gulp.task('scripts', function() {
   gulp.src(paths.coffee)
     .pipe(coffee({ bare: true }))
-    .pipe(uglify())
+    .pipe(uglify({ mangle: false }))
     .pipe(gulp.dest('build/scripts'));
 });
 

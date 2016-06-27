@@ -1,1 +1,1 @@
-app = angular.module('mainApp.directives', [])
+angular.module('mainApp.directives', [])
