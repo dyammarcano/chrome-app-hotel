@@ -1,0 +1,28 @@
+.module(ng-controller='loginController')
+  .wellcome.text-uppercase
+    h1 {{ bigMessage }}
+  .group
+    .box
+      .mini
+        img.img-circle(src='app/images/login.jpg')
+      .status
+        span.label.label-default(ng-show="conectionStatus == 'offline'")
+          i.fa.fa-circle-o-notch.fa-spin
+          |   fuera de linea
+        span.label.label-success(ng-show="conectionStatus != 'offline'")
+          i.fa.fa-exchange
+          |   en linea
+      form(name='myForm', ng-submit='login(credentials)', novalidate='')
+        .input-group
+          span.input-group-addon
+            i.fa.fa-envelope-o
+          input#email.form-control(type='email', ng-model='credentials.email', placeholder='{{ inputName }}', required='')
+        .input-group
+          span.input-group-addon
+            i.fa.fa-key
+          input#password.form-control(type='password', ng-model='credentials.password', placeholder='{{ inputPass }}', required='')
+        .form-group
+          button.btn.btn-default.btn-block.text-uppercase(ng-disabled='myForm.$valid !== true || linkConnect === true', type='submin')
+            i.fa.fa-refresh.fa-spin(ng-show="buttonText == 'Verificando'")
+            i.fa.fa-sign-in(ng-show="buttonText == 'Ingresar'", aria-hidden='true')
+            |  {{ buttonText }}

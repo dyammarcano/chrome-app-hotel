@@ -1,0 +1,16 @@
+doctype html
+html(ng-app='mainApp')
+  head
+    meta(charset='utf-8')
+    link(rel='stylesheet', href='components/font-awesome/css/font-awesome.min.css')
+    link(rel='stylesheet', href='components/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='stylesheets/sandstone.css')
+    link(rel='stylesheet', href='components/roboto-fontface/css/roboto/roboto-fontface.css')
+  body
+    #particles(ng-hide='hideParticles')
+    .container(ng-view='')
+    script(type='text/javascript', src='../scripts/vendors.min.js')
+    script(type='text/javascript', src='../scripts/controllers.js')
+    script(type='text/javascript', src='../scripts/directives.js')
+    script(type='text/javascript', src='../scripts/services.js')
+    script(type='text/javascript', src='../scripts/filters.js')

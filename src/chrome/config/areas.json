@@ -1,0 +1,53 @@
+//http://materializecss.com/color.html
+{
+  "area": {
+    "a": {
+      "type":"cocina a & b",
+      "label":"yellow darken-4"
+    },
+    "b": {
+      "type":"seguridad",
+      "label":"indigo darken-4"
+    },
+    "c": {
+      "type":"botones",
+      "label":"teal darken-4"
+    },
+    "d": {
+      "type":"recepcion",
+      "label":"purple darken-4 "
+    },
+    "e": {
+      "type":"recursos humanos",
+      "label":"red darken-4"
+    },
+    "f": {
+      "type":"ama de llaves",
+      "label":"darken-4"
+    },
+    "g": {
+      "type":"transporte",
+      "label":"darken-4"
+    },
+    "h": {
+      "type":"mantenimiento",
+      "label":"darken-4"
+    },
+    "i": {
+      "type":"contabilidad",
+      "label":"darken-4"
+    },
+    "j": {
+      "type":"restaurant",
+      "label":"darken-4"
+    },
+    "k": {
+      "type":"banquetes",
+      "label":"darken-4"
+    },
+    "l": {
+      "type":"gerencia general",
+      "label":"darken-4"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+    "name": "Control de Asistencia",
+    "version": "1.0.0.15",
+    "manifest_version": 2,
+    "default_locale":"en",
+    "minimum_chrome_version": "45",
+    "description": "Control de Asistencia para Empleados Hotel Eurobuilding",
+    "author": "Dyam Marcano <dyam.marcano@gmail.com>",
+    "offline_enabled": true,
+    "permissions": [
+        {
+            "socket": [
+                "tcp-listen:*:*",
+                "tcp-connect:*:*",
+                "udp-bind:*:*",
+                "udp-send-to:*:*"
+            ]
+        },
+        "alarms",
+        "identity",
+        "idle",
+        "storage",
+        "unlimitedStorage",
+        "<all_urls>",
+        "background",
+        "notifications"
+    ],
+    "icons": {
+        "16": "images/icon16.png",
+        "48": "images/icon48.png",
+        "128": "images/icon128.png"
+    },
+    "app": {
+        "background": {
+            "persistent": false,
+            "scripts": [
+                "scripts/background.js"
+            ]
+        }
+    }
+}
