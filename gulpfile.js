@@ -23,18 +23,18 @@ var paths = {
 };
 
 var jsFiles = [
+  "bower_components/moment/min/moment-with-locales.js",
   "bower_components/angular/angular.js",
   "bower_components/angular-animate/angular-animate.js",
   "bower_components/angular-touch/angular-touch.js",
   "bower_components/angular-route/angular-route.js",
   "bower_components/angular-route-styles/route-styles.js",
   "bower_components/angular-bootstrap/ui-bootstrap.js",
-  "bower_components/moment/min/moment-with-locales.js",
-  "bower_components/underscore/underscore.js",
+  //"bower_components/underscore/underscore.js",
   "bower_components/particles.js/particles.js",
-  "bower_components/js-xlsx/xlsx.js",
-  "bower_components/excellentexport/excellentexport.js",
-  "bower_components/pdfmake/build/pdfmake.js",
+  //"bower_components/js-xlsx/xlsx.js",
+  //"bower_components/excellentexport/excellentexport.js",
+  //"bower_components/pdfmake/build/pdfmake.js",
 ]
 
 fonts = {
@@ -56,17 +56,19 @@ css = [
   "bower_components/bootstrap/dist/css/bootstrap-theme.css",
   "bower_components/bootstrap/dist/css/bootstrap.css",
   "bower_components/font-awesome/css/font-awesome.css",
-  "bower_components/roboto-fontface/css/roboto/roboto-fontface.css",
 ]
 
-gulp.task('before', function() {
+var roboto = "bower_components/roboto-fontface/css/roboto/roboto-fontface.css";
+
+gulp.task('clean', function() {
   gulp.src('dist', { read: false }).pipe(clean());
+  gulp.src('build', { read: false }).pipe(clean());
 });
 
 gulp.task('copy', function() {
   gulp.src(paths.chrome).pipe(gulp.dest('build'));
   gulp.src(fonts.a.dn).pipe(gulp.dest(fonts.a.dp));
-  gulp.src(fonts.b.dn).pipe(gulp.dest(fonts.b.dp));
+  //gulp.src(fonts.b.dn).pipe(gulp.dest(fonts.b.dp));
   gulp.src(fonts.c.dn).pipe(gulp.dest(fonts.c.dp));
   gulp.src(paths.images)
     .pipe(imagemin({ optimizationLevel: 5 }))
@@ -74,6 +76,9 @@ gulp.task('copy', function() {
   gulp.src(css)
     .pipe(minifyCss())
     .pipe(gulp.dest('build/styles'));
+  gulp.src(roboto)
+    .pipe(minifyCss())
+    .pipe(gulp.dest('build/styles/roboto'));
 });
 
 gulp.task('copyDev', function() {
@@ -87,6 +92,8 @@ gulp.task('copyDev', function() {
     .pipe(sourcemaps.init()) // source maps init
     .pipe(sourcemaps.write('maps')) // source maps write
     .pipe(gulp.dest('build/styles'));
+  gulp.src(roboto)
+    .pipe(gulp.dest('build/styles/roboto'));
 });
 
 gulp.task('vendors', function() {
@@ -98,6 +105,8 @@ gulp.task('vendors', function() {
 
 gulp.task('vendorsDev', function() {
   merge2(gulp.src(jsFiles))
+    .pipe(jshint('.jshintrc'))
+    .pipe(jshint.reporter(require('jshint-stylish')))
     .pipe(sourcemaps.init()) // source maps init
     .pipe(sourcemaps.write('maps')) // source maps write
     .pipe(concat('vendors.js'))
@@ -159,6 +168,6 @@ gulp.task('watch', function() {
   gulp.watch(paths.styles, ['stylesDev']);
 });
 
-gulp.task('dev',     ['scriptsDev', 'copyDev', 'styles', 'pugDev', 'vendorsDev']);
-gulp.task('prod',    ['before', 'scripts', 'copy', 'styles', 'pug', 'vendors', 'zip']);
+gulp.task('dev',     ['scriptsDev', 'copyDev', 'stylesDev', 'pugDev', 'vendorsDev']);
+gulp.task('prod',    ['scripts', 'copy', 'styles', 'pug', 'vendors', 'zip']);
 gulp.task('default', ['dev', 'watch']);
