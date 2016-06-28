@@ -21,7 +21,7 @@ var util        = require('util');
 var paths = {
   pug:            'src/views/**/*.pug',
   styles:         'src/styles/**/*.styl',
-  coffee:         'src/scripts/**/*.coffee',
+  scripts:        'src/scripts/**/*.js',
   images:         'src/images/**/*',
   chrome:         'src/chrome/**/*',
   temp_dir:       '.tmp/scripts',
@@ -29,7 +29,7 @@ var paths = {
   build_styles:   'build/styles',
   build_images:   'build/images',
   build_scrips:   'build/scripts',
-  compile_scrips: '.tmp/compile/scripts',
+  compile_scrips: 'src/scripts',
 };
 
 var vendorsFiles = [
@@ -72,25 +72,6 @@ var roboto = "bower_components/roboto-fontface/css/roboto/roboto-fontface.css";
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('coffee', function() {
-  gulp.src(paths.coffee)
-    .pipe(coffee({ bare: true }))
-    .pipe(jshint('.jshintrc'))
-    .pipe(jshint.reporter(require('jshint-stylish')))
-    .pipe(gulp.dest(paths.compile_scrips));
-});
-
-gulp.task('buildCoffee', ['coffee'], function() {
-  setTimeout(function() {
-    merge2(gulp.src([paths.compile_scrips + "/**", "!" + paths.compile_scrips + "/background.js"]))
-      .pipe(concat('app.js'))
-      .pipe(gulp.dest(paths.build_scrips));
-
-    gulp.src(paths.compile_scrips + "/background.js")
-      .pipe(gulp.dest(paths.build_scrips));
-  }, 5000);
-});
-
 gulp.task('buildVendors', function() {
   merge2(gulp.src(vendorsFiles))
     .pipe(concat('vendors.js'))
@@ -111,6 +92,9 @@ gulp.task('buildStyles', function() {
 });
 
 gulp.task('copy', function() {
+  gulp.src(paths.scripts)
+      .pipe(gulp.dest(paths.build_scrips));
+
   gulp.src(paths.chrome)
     .pipe(gulp.dest('build'));
 
@@ -137,7 +121,7 @@ gulp.task('copy', function() {
 });
 
 gulp.task('pack', function() {
-  runSequence(['buildCoffee', 'buildStyles', 'buildVendors', 'buildPug']);
+  runSequence(['buildStyles', 'buildVendors', 'buildPug']);
 });
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -155,71 +139,6 @@ gulp.task('clean', function(cb) {
   cb();
 });
 
-/*
-gulp.task('copy', function() {
-  gulp.src(paths.chrome)
-    .pipe(gulp.dest(paths.build_scrips));
-
-  gulp.src(fonts.a.dn)
-    .pipe(gulp.dest(fonts.a.dp));
-
-  gulp.src(fonts.b.dn)
-    .pipe(gulp.dest(fonts.b.dp));
-
-  gulp.src(fonts.c.dn)
-    .pipe(gulp.dest(fonts.c.dp));
-
-  gulp.src(paths.images)
-    .pipe(imagemin({ optimizationLevel: 5 }))
-    .pipe(gulp.dest('build/images'));
-
-  gulp.src(css)
-    .pipe(minifyCss())
-    .pipe(gulp.dest('build/styles'));
-
-  gulp.src(roboto)
-    .pipe(minifyCss())
-    .pipe(gulp.dest('build/styles/roboto'));
-});
-
-gulp.task('copyDev', function() {
-  gulp.src(paths.chrome).pipe(gulp.dest('build'));
-  gulp.src(fonts.a.dn).pipe(gulp.dest(fonts.a.dp));
-  gulp.src(fonts.b.dn).pipe(gulp.dest(fonts.b.dp));
-  gulp.src(fonts.c.dn).pipe(gulp.dest(fonts.c.dp));
-  gulp.src(paths.images)
-    .pipe(gulp.dest('build/images'));
-  gulp.src(css)
-    .pipe(sourcemaps.init()) // source maps init
-    .pipe(sourcemaps.write('maps')) // source maps write
-    .pipe(gulp.dest('build/styles'));
-  gulp.src(roboto)
-    .pipe(gulp.dest('build/styles/roboto'));
-});
-
-gulp.task('pugDev', function() {
-  gulp.src(paths.pug)
-    .pipe(pug({ pretty: false }))
-    .pipe(gulp.dest('build/views'));
-});
-
-gulp.task('scripts', function() {
-  gulp.src(paths.coffee)
-    .pipe(coffee({ bare: true }))
-    .pipe(uglify({ mangle: false }))
-    .pipe(gulp.dest('build/scripts'));
-});
-
-gulp.task('scriptsDev', function() {
-  gulp.src(paths.coffee)
-    .pipe(coffee({ bare: true }))
-    .pipe(jshint('.jshintrc'))
-    .pipe(jshint.reporter(require('jshint-stylish')))
-    .pipe(sourcemaps.init()) // source maps init
-    .pipe(sourcemaps.write('maps')) // source maps write
-    .pipe(gulp.dest('build/scripts'));
-});
-*/
 gulp.task('pug', function() {
   gulp.src(paths.pug)
     .pipe(pug({ pretty: true }))
@@ -241,9 +160,20 @@ gulp.task('zip', function() {
     .pipe(gulp.dest('dist'));
 });
 
+gulp.task('cfg', function() {
+  gulp.src(paths.chrome)
+    .pipe(gulp.dest('build'));
+});
+
+gulp.task('js', function() {
+  gulp.src(paths.scripts)
+    .pipe(gulp.dest(paths.build_scrips));
+});
+
 gulp.task('watch', function() {
   gulp.watch(paths.pug,    ['pug']);
-  gulp.watch(paths.coffee, ['buildCoffee']);
+  gulp.watch(paths.scripts, ['js']);
+  gulp.watch(paths.chrome, ['cfg']);
   gulp.watch(paths.styles, ['styles']);
 });
 
