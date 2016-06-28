@@ -1,1 +1,1 @@
-angular.module('mainApp.services', [])
+myModule = angular.module('mainApp.services', []).value('version', '0.1')

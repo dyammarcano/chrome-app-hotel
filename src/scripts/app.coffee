@@ -1,6 +1,7 @@
 particlesJS.load 'particles', '../config/particles.json'
-app = angular.module('mainApp', [
+angular.module('mainApp', [
   'ngRoute'
+  'btford.socket-io'
   'routeStyles'
   'ui.bootstrap'
   'ngAnimate'
@@ -9,7 +10,7 @@ app = angular.module('mainApp', [
   'mainApp.filters'
   'mainApp.services'
 ])
-app.config [
+.config [
   '$routeProvider'
   ($routeProvider) ->
     $routeProvider.when '/',

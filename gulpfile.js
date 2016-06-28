@@ -39,7 +39,7 @@ var vendorsFiles = [
   "bower_components/angular-route/angular-route.js",
   "bower_components/angular-route-styles/route-styles.js",
   "bower_components/angular-bootstrap/ui-bootstrap.js",
-  //"bower_components/underscore/underscore.js",
+  "bower_components/angular-socket-io/socket.js",
   "bower_components/moment/min/moment-with-locales.js",
   "bower_components/particles.js/particles.js",
   //"bower_components/js-xlsx/xlsx.js",
