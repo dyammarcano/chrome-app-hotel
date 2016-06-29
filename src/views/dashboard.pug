@@ -1,4 +1,22 @@
-
+#page-wrapper(ng-class="{'close': toggle}", ng-cloak='')
+  // Sidebar
+  #sidebar-wrapper
+    ul.sidebar
+      li.sidebar-main
+        a(ng-click='toggleSidebar()')
+          | {{ date.raw | date:'hh:mm:ss' }}
+          span.menu-icon.glyphicon.glyphicon-transfer
+      li.sidebar-title
+        span NAVIGATION
+      li.sidebar-list
+        a(href='#')
+          | Dashboard 
+          span.menu-icon.fa.fa-tachometer
+      li.sidebar-list
+        a(href='#/tables')
+          | Tables 
+          span.menu-icon.fa.fa-table
+  // End Sidebar
 
 
 //- //- .test

@@ -1,16 +1,33 @@
-angular.module('mainApp', ['ngRoute', 'routeStyles', 'ui.bootstrap', 'ngAnimate', 'mainApp.controllers', 'mainApp.directives', 'mainApp.filters', 'mainApp.services'])
+/**
+ * main angular app 
+ */
 
-  .config(['$routeProvider', function($routeProvider, $locationProvider) {
+angular.module('mainApp', ['ui.router', 'uiRouterStyles', 'ui.bootstrap', 'ngAnimate'])
+
+  /*.run(function ($rootScope, $state, AuthService) {
+    $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+      if (toState.authenticate && !AuthService.isAuthenticated()){
+        // User isn’t authenticated
+        $state.transitionTo("login");
+        event.preventDefault(); 
+      }
+    });
+  })*/
+  .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouteProvider) {
       
-    $routeProvider
+    $urlRouteProvider.otherwise('/');
 
-      .when('/', { 
+    $stateProvider
+      .state('startup', { 
+        url: '/',
         templateUrl: 'login.html', 
         controller: 'loginController', 
-        css: '../styles/login.css' 
+        //authenticate: false,
+        data: {
+          css: ['../styles/sandstone.css', '../styles/login.css']
+        }
       })
-
-      .when('/dashboard', {
+      .state('dashboard', {
         resolve: {
           'check': function($location, $rootScope) {
             if (!$rootScope.loggedIn) {
@@ -20,17 +37,13 @@ angular.module('mainApp', ['ngRoute', 'routeStyles', 'ui.bootstrap', 'ngAnimate'
         }, 
         templateUrl: 'dashboard.html', 
         controller: 'dashboardController', 
-        css: '../styles/dashboard.css' 
-      })
-
-      .otherwise({
-        redirectTo: '/' 
+        //authenticate: true,
+        data: {
+          css: ['../styles/sandstone.css', '../styles/dashboard.css']
+        }
       });
   }
-]);
-
-angular.module('mainApp.controllers', [])
-
+])
 .controller('loginController', function($scope, $timeout, $http, $location, $rootScope) {
   $rootScope.hideParticles = false;
   $scope.buttonText = 'Ingresar';
@@ -59,6 +72,18 @@ angular.module('mainApp.controllers', [])
 
   statusServer();
 
+  $rootScope.contents = null;
+
+  $http.get('../config/app.json')
+    .success(function(data) {
+      $rootScope.contents = data;
+    })
+    .error(function(data,status,error,config){
+      $rootScope.contents = [{ heading:"Error", description:"Could not load json   data" }];
+    });
+
+  //console.log($rootScope.contents);
+
   $scope.login = function(credentials) {
     $scope.buttonText = 'Verificando';
     $scope.linkConnect = true;
@@ -74,11 +99,12 @@ angular.module('mainApp.controllers', [])
     }, 1000);
   };
 })
-
 .controller('dashboardController', function($scope, $http, $location, $rootScope, $timeout) {
   $rootScope.hideParticles = !$rootScope.hideParticles;
 
   $scope.date = {};
+
+  console.log($rootScope.contents);
   
   $scope.logout = function() {
     $rootScope.loggedIn = false;
@@ -89,20 +115,14 @@ angular.module('mainApp.controllers', [])
     $timeout(updateTime, 1000);
   };
   updateTime();
-});
-
-angular.module('mainApp.directives', [])
-
+})
 .directive('appVersion', [
   'version', function(version) {
     return function(scope, elm, attrs) {
       elm.text(version);
     };
   }
-]);
-
-angular.module('mainApp.filters', [])
-
+])
 .filter('interpolate', [
   'version', function(version) {
     return function(text) {
@@ -110,5 +130,3 @@ angular.module('mainApp.filters', [])
     };
   }
 ]);
-
-var myModule = angular.module('mainApp.services', []).value('version', '0.1');

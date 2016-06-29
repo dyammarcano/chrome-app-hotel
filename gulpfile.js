@@ -42,40 +42,18 @@ var vendorsFiles = [
   "bower_components/angular-ui-event/dist/event.js",
   "bower_components/angular-ui-scroll/dist/ui-scroll.js",
   "bower_components/angular-ui-scrollpoint/dist/scrollpoint.js",
-  "bower_components/angular-ui-uploader/dist/uploader.js",
+  //"bower_components/angular-ui-uploader/dist/uploader.js",
   "bower_components/angular-animate/angular-animate.js",
   "bower_components/angular-touch/angular-touch.js",
-  "bower_components/angular-route/angular-route.js",
-  "bower_components/angular-route-styles/route-styles.js",
+  //"bower_components/angular-route/angular-route.js",
+  "bower_components/angular-ui-router/release/angular-ui-router.js",
+  "bower_components/angular-ui-router-styles/ui-router-styles.js",
+  //"bower_components/angular-route-styles/route-styles.js",
   "bower_components/angular-sanitize/angular-sanitize.js",
   "bower_components/angular-bootstrap/ui-bootstrap.js",
   //"bower_components/angular-socket-io/socket.js",
   "bower_components/moment/min/moment-with-locales.js",
   "bower_components/particles.js/particles.js",
-  //"bower_components/js-xlsx/xlsx.js",
-  //"bower_components/excellentexport/excellentexport.js",
-  //"bower_components/pdfmake/build/pdfmake.js",
-]
-
-var vendorsFiles2 = [
-  "bower_components/angular/angular.min.js",
-  "bower_components/angular-ui-validate/dist/validate.min.js",
-  "bower_components/angular-ui-indeterminate/dist/indeterminate.min.js",
-  "bower_components/angular-ui-mask/dist/mask.min.js",
-  "bower_components/angular-ui-event/dist/event.min.js",
-  "bower_components/angular-ui-scroll/dist/ui-scroll.min.js",
-  "bower_components/angular-ui-scrollpoint/dist/scrollpoint.min.js",
-  "bower_components/angular-ui-uploader/dist/uploader.min.js",
-
-  "bower_components/angular-animate/angular-animate.min.js",
-  "bower_components/angular-touch/angular-touch.min.js",
-  "bower_components/angular-route/angular-route.min.js",
-  "bower_components/angular-route-styles/route-styles.js",
-  "bower_components/angular-sanitize/angular-sanitize.min.js",
-  "bower_components/angular-bootstrap/ui-bootstrap.min.js",
-  "bower_components/angular-socket-io/socket.min.js",
-  "bower_components/moment/min/moment-with-locales.min.js",
-  "bower_components/particles.js/particles.min.js",
   //"bower_components/js-xlsx/xlsx.js",
   //"bower_components/excellentexport/excellentexport.js",
   //"bower_components/pdfmake/build/pdfmake.js",
@@ -149,7 +127,7 @@ gulp.task('copy', function() {
     .pipe(gulp.dest(fonts.c.dp));
 
   gulp.src(paths.images)
-    .pipe(imagemin({ optimizationLevel: 5 }))
+    .pipe(imagemin({ optimizationLevel: 1 }))
     .pipe(gulp.dest(paths.build_images));
 
   gulp.src(css)
@@ -219,6 +197,20 @@ gulp.task('watch', function() {
   gulp.watch(paths.chrome, ['cfg']);
   gulp.watch(paths.styles, ['styles']);
 });
+
+//gulp.task('webserver', function() {
+  //connect.server({
+    //root: 'dist',
+    //livereload: true,
+//    port: 8888
+  //});
+//});
+
+//gulp.task('livereload', function() {
+  //gulp.src(['dist/**/*.*'])
+    //.pipe(watch(['dist/**/*.*']))
+    //.pipe(connect.reload());
+//});
 
 gulp.task('prod',    ['scripts', 'copy', 'styles', 'pug', 'vendors', 'zip']);
 gulp.task('default', ['pack', 'watch']);
