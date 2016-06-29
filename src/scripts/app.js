@@ -1,27 +1,31 @@
-particlesJS.load('particles', '../config/particles.json');
+angular.module('mainApp', ['ngRoute', 'routeStyles', 'ui.bootstrap', 'ngAnimate', 'mainApp.controllers', 'mainApp.directives', 'mainApp.filters', 'mainApp.services'])
 
-angular.module('mainApp', ['ngRoute', 'btford.socket-io', 'routeStyles', 'ui.bootstrap', 'ngAnimate', 'mainApp.controllers', 'mainApp.directives', 'mainApp.filters', 'mainApp.services']).config([
-  '$routeProvider', function($routeProvider) {
-    $routeProvider.when('/', {
-      templateUrl: 'login.html',
-      controller: 'loginController',
-      css: '../styles/login.css'
-    });
-    $routeProvider.when('/dashboard', {
-      resolve: {
-        'check': function($location, $rootScope) {
-          if (!$rootScope.loggedIn) {
-            $location.path('/');
+  .config(['$routeProvider', function($routeProvider, $locationProvider) {
+      
+    $routeProvider
+
+      .when('/', { 
+        templateUrl: 'login.html', 
+        controller: 'loginController', 
+        css: '../styles/login.css' 
+      })
+
+      .when('/dashboard', {
+        resolve: {
+          'check': function($location, $rootScope) {
+            if (!$rootScope.loggedIn) {
+              $location.path('/');
+            } 
           }
-        }
-      },
-      templateUrl: 'dashboard.html',
-      controller: 'dashboardController',
-      css: '../styles/dashboard.css'
-    });
-    $routeProvider.otherwise({
-      redirectTo: '/'
-    });
+        }, 
+        templateUrl: 'dashboard.html', 
+        controller: 'dashboardController', 
+        css: '../styles/dashboard.css' 
+      })
+
+      .otherwise({
+        redirectTo: '/' 
+      });
   }
 ]);
 
@@ -35,11 +39,11 @@ angular.module('mainApp.controllers', [])
   $scope.bigMessage = 'Hotel EuroBuilding Puerto Ordaz';
   $scope.conectionStatus = 'offline';
   $scope.linkConnect = false;
+
   $scope.credentials = {
     email: 'dyam.marcano@gmail.com',
     password: 'admin'
   };
-
 
   var statusServer = function() {
     chrome.storage.local.get('remote', function(resp) {
@@ -52,6 +56,7 @@ angular.module('mainApp.controllers', [])
     
     $timeout(statusServer, 2000);
   };
+
   statusServer();
 
   $scope.login = function(credentials) {
@@ -71,7 +76,7 @@ angular.module('mainApp.controllers', [])
 })
 
 .controller('dashboardController', function($scope, $http, $location, $rootScope, $timeout) {
-  $rootScope.hideParticles = true;
+  $rootScope.hideParticles = !$rootScope.hideParticles;
 
   $scope.date = {};
   $scope.data = {
@@ -82,7 +87,7 @@ angular.module('mainApp.controllers', [])
     return $location.path('/');
   };
   var updateTime = function() {
-    $scope.date.raw = new Date;
+    $scope.date.raw = new Date();
     $timeout(updateTime, 1000);
   };
   updateTime();

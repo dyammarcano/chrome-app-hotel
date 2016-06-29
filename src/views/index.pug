@@ -1,13 +1,14 @@
 doctype html
-html(ng-app='mainApp')
+html(ng-app="mainApp")
   head
-    meta(charset='utf-8')
-    link(rel='stylesheet', href='../styles/font-awesome.css')
-    link(rel='stylesheet', href='../styles/bootstrap.css')
-    link(rel='stylesheet', href='../styles/sandstone.css')
-    link(rel='stylesheet', href='../styles/roboto/roboto-fontface.css')
+    meta(charset="utf-8")
+    link(rel="stylesheet", href="../styles/font-awesome.css")
+    link(rel="stylesheet", href="../styles/bootstrap.css")
+    link(rel="stylesheet", href="../styles/sandstone.css")
+    link(rel="stylesheet", href="../styles/roboto/roboto-fontface.css")
   body
-    #particles(ng-hide='hideParticles')
-    .container(ng-view='')
-    script(type='text/javascript', src='../scripts/vendors.js')
-    script(type='text/javascript', src='../scripts/app.js')
+
+    div(ng-view="")
+
+    script(type="text/javascript", src="../scripts/vendors.js")
+    script(type="text/javascript", src="../scripts/app.js")

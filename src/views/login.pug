@@ -1,4 +1,6 @@
-.module(ng-controller='loginController')
+script(type='text/javascript').
+  particlesJS.load('particles', '../config/particles.json');
+.container#particles
   .wellcome.text-uppercase
     h1 {{ bigMessage }}
   .group
@@ -16,13 +18,12 @@
         .input-group
           span.input-group-addon
             i.fa.fa-envelope-o
-          input#email.form-control(type='email', ng-model='credentials.email', placeholder='{{ inputName }}', required='')
+          input#email.form-control(type='email', ng-model='credentials.email', placeholder='{{ inputName }}', ng-required="'true'")
         .input-group
           span.input-group-addon
             i.fa.fa-key
-          input#password.form-control(type='password', ng-model='credentials.password', placeholder='{{ inputPass }}', required='')
+          input#password.form-control(type='password', ng-model='credentials.password', placeholder='{{ inputPass }}', ng-required="'true'")
         .form-group
-          button.btn.btn-default.btn-block.text-uppercase(ng-disabled='myForm.$valid !== true || linkConnect === true', type='submin')
-            i.fa.fa-refresh.fa-spin(ng-show="buttonText == 'Verificando'")
-            i.fa.fa-sign-in(ng-show="buttonText == 'Ingresar'", aria-hidden='true')
+          button.btn.btn-default.btn-block.text-uppercase(type='submit', ng-disabled='!myForm.$valid')
+            i(ng-class="{'fa fa-sign-in': !linkConnect, 'fa fa-refresh fa-spin': linkConnect}")
             |  {{ buttonText }}
