@@ -17,6 +17,8 @@ var browserify  = require('gulp-browserify');
 var rename      = require('gulp-rename');
 var runSequence = require('run-sequence');
 var util        = require('util');
+var stylint     = require('gulp-stylint');
+var templateCache = require('gulp-angular-templatecache');
 
 var paths = {
   pug:            'src/views/**/*.pug',
@@ -124,6 +126,8 @@ gulp.task('buildPug', ['copy'], function() {
 
 gulp.task('buildStyles', function() {
   gulp.src(paths.styles)
+    .pipe(stylint({config: '.stylintrc'}))
+    .pipe(stylint.reporter())
     .pipe(stylus({ compress: true }))
     .pipe(gulp.dest(paths.build_styles));
 });
@@ -185,6 +189,8 @@ gulp.task('pug', function() {
 
 gulp.task('styles', function() {
   gulp.src(paths.styles)
+    .pipe(stylint({config: '.stylintrc'}))
+    .pipe(stylint.reporter())
     .pipe(stylus({ compress: true }))
     .pipe(gulp.dest(paths.build_styles));
 });

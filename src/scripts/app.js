@@ -67,7 +67,7 @@ angular.module('mainApp.controllers', [])
       $scope.buttonText = 'Ingresar';
       $scope.linkConnect = false;
       if (credentials.email === 'dyam.marcano@gmail.com' && credentials.password === 'admin') {
-        $rootScope.user = 'object of user data';
+        $rootScope.user = $rootScope.user;
         $rootScope.loggedIn = true;
         $location.path('/dashboard');
       }
@@ -79,9 +79,7 @@ angular.module('mainApp.controllers', [])
   $rootScope.hideParticles = !$rootScope.hideParticles;
 
   $scope.date = {};
-  $scope.data = {
-    id: ''//$rootScope.remote.local_ip
-  };
+  
   $scope.logout = function() {
     $rootScope.loggedIn = false;
     return $location.path('/');
