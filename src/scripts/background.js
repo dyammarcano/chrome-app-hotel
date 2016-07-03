@@ -45,8 +45,35 @@ var syncServer = function() {
   });
 };
 
+var syncServer2 = function() {
+  chrome.storage.local.get('remote', function(rdata) {
+    var data = rdata.remote;
+    var url = 'http://' + data.local_ip + '/api/status';
+    //console.log(data);
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4) {
+        var resp = JSON.parse(xhr.responseText);
+
+        if (resp.online !== undefined) {
+          if (resp.online) {
+            chrome.storage.local.set(resp);
+            console.log(resp);
+          }
+        }
+      }
+    };
+    xhr.send();
+  });
+};
+
 loadJsonFile('config/app.json');
 
 setInterval(function() {
   syncServer();
-}, 10000);//1800000);
+}, 1800000);
+
+setInterval(function() {
+  syncServer2();
+}, 60000);

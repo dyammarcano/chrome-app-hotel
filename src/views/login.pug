@@ -8,12 +8,9 @@ script(type='text/javascript').
       .mini
         img.img-circle(src='../images/login.jpg')
       .status
-        span.label.label-default(ng-show="conectionStatus == 'offline'")
-          i.fa.fa-circle-o-notch.fa-spin
-          |   fuera de linea
-        span.label.label-success(ng-show="conectionStatus != 'offline'")
-          i.fa.fa-exchange
-          |   en linea
+        span(ng-class="{'label label-default': conectionStatus, 'label label-success': !conectionStatus}")
+          i(ng-class="{'fa fa-sign-in': conectionStatus, 'fa fa-refresh fa-spin': !conectionStatus}")
+          |  {{ textStatus }}
       form(name='myForm', ng-submit='login(credentials)', novalidate='')
         .input-group
           span.input-group-addon
