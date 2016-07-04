@@ -70,10 +70,10 @@ var syncServer2 = function() {
 
 loadJsonFile('config/app.json');
 
-setInterval(function() {
+/*setInterval(function() {
   syncServer();
 }, 1800000);
 
 setInterval(function() {
   syncServer2();
-}, 60000);
+}, 60000);*/

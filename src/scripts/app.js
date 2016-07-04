@@ -1,5 +1,5 @@
 
-var app = angular.module('MainApp', ['ui.router', 'uiRouterStyles', 'ui.bootstrap']);
+var app = angular.module('MainApp', ['btford.socket-io', 'ui.router', 'uiRouterStyles', 'ui.bootstrap']);
 
 app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
@@ -38,6 +38,12 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
   });
 }]);
 
+app.factory('socket', function (socketFactory) {
+  return socketFactory({
+    ioSocket: io.connect('http://192.168.1.50:3000')
+  });
+});
+
 /*app.factory('Users', ['$http', function($http) {
   return {
     get: function() {
@@ -67,23 +73,25 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
   };
 }]);*/
 
-app.controller('loginController', ['$scope', '$timeout', '$http', '$rootScope', '$location', function ($scope, $timeout, $http, $rootScope, $location) {
+app.controller('loginController', ['socket', '$scope', '$timeout', '$http', '$rootScope', '$location', function (socket, $scope, $timeout, $http, $rootScope, $location) {
+
+  $scope.messages = [];
+
+  $scope.conectionStatus = false;
+  $scope.textStatus ='conectando';
+  
+  socket.on('connect', function () {
+
+    socket.on('status', function (data) {
+      $scope.messages.push(data);
+      $scope.conectionStatus = data;
+      $scope.textStatus ='conectado';
+      //console.log($scope.messages)
+    });
+  });
 
   $scope.text = 'login part from controller';
   $scope.date = {};
-  $scope.conectionStatus = true;
-
-  //console.log(Server.get());
-
-  /*Server.method().success(function(response) {
-    console.log(response);
-  });*/
-
-  if ($scope.conectionStatus) {
-    $scope.textStatus ='conectado';
-  } else {
-    $scope.textStatus ='conectando';
-  }
 
   var updateTime = function() {
     $scope.date.raw = new Date();

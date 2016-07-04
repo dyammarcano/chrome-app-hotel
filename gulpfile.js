@@ -54,6 +54,8 @@ var vendorsFiles = [
   //"bower_components/angular-socket-io/socket.js",
   "bower_components/moment/min/moment-with-locales.js",
   "bower_components/particles.js/particles.js",
+  "https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js",
+  "bower_components/angular-socket-io/socket.min.js",
   //"bower_components/js-xlsx/xlsx.js",
   //"bower_components/excellentexport/excellentexport.js",
   //"bower_components/pdfmake/build/pdfmake.js",
