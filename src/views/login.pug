@@ -1,6 +1,5 @@
-script(type='text/javascript').
-  particlesJS.load('particles', '../config/particles.json');
-.fluid-container#particles
+// views/login.html
+#login
   .wellcome.text-uppercase
     h1 {{ bigMessage }}
   .group
@@ -8,8 +7,8 @@ script(type='text/javascript').
       .mini
         img.img-circle(src='../images/login.jpg')
       .status
-        span(ng-class="{'label label-default': conectionStatus, 'label label-success': !conectionStatus}")
-          i(ng-class="{'fa fa-sign-in': conectionStatus, 'fa fa-refresh fa-spin': !conectionStatus}")
+        span(ng-class="{'label label-success': conectionStatus, 'label label-default': !conectionStatus}")
+          i(ng-class="{'fa fa-exchange': conectionStatus, 'fa fa-refresh fa-spin': !conectionStatus}")
           |  {{ textStatus }}
       form(name='myForm', ng-submit='login(credentials)', novalidate='')
         .input-group

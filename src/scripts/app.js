@@ -1,55 +1,102 @@
-var app = angular.module('mainApp', ['ui.router', 'uiRouterStyles', 'ui.bootstrap', 'ngAnimate']);
 
-  /*app.run(function ($rootScope, $state, AuthService) {
-    $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-      if (toState.authenticate && !AuthService.isAuthenticated()){
-        // User isn’t authenticated
-        $state.transitionTo("login");
-        event.preventDefault(); 
-      }
-    });
-  })*/
+var app = angular.module('MainApp', ['ui.router', 'uiRouterStyles', 'ui.bootstrap']);
 
-app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouteProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
-  $urlRouteProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/');
 
-  $stateProvider.state('startup', { 
-    url: '/',
-    templateUrl: 'login.html', 
-    controller: 'loginController', 
-    //authenticate: false,
+  $stateProvider.state('login', {
+    url:'/',
+    views: {
+      'main@': {
+        templateUrl: 'login.html',
+        controller: 'loginController'
+      },
+    },
     data: {
-      css: ['../styles/sandstone.css', '../styles/login.css']
+      css: ['../styles/login.css']
     }
   });
 
   $stateProvider.state('dashboard', {
-    resolve: {
-      'check': function($location, $rootScope) {
-        if (!$rootScope.loggedIn) {
-          $location.path('/');
-        } 
+    url:'/dashboard',
+    views: {
+      'header@dashboard': {
+        templateUrl: 'views/header/header.html'
+      },
+      'content@dashboard': {
+        templateUrl: 'views/dashboard/dashboard.html'
+      },
+      'sidebar@dashboard': {
+        templateUrl: 'views/sidebar/sidebar.html'
+      },
+      data: {
+        css: ['../rdash-angular-master/src/components/rdash-ui/dist/css/rdash.min.css']
       }
-    }, 
-    templateUrl: 'dashboard.html', 
-    controller: 'dashboardController', 
-    //authenticate: true,
-    data: {
-      css: ['../styles/sandstone.css', '../styles/dashboard.css']
-    }
+    },
+    controller: 'dashboardController'
   });
 }]);
 
-app.controller('loginController', ['$scope', '$timeout', '$http', '$location', '$rootScope', function($scope, $timeout, $http, $location, $rootScope) {
+/*app.factory('Users', ['$http', function($http) {
+  return {
+    get: function() {
+      return $http.get('data.json').then(function(response) {
+        return response.data;
+      });
+    }
+  };
+  }
+]);*/
+
+/*app.factory('Server', function($http) {
+  var obj = {};
+  obj.method = function() {
+    return $http.get('http://api.node05.comxa.com/?device=5AD9420A');
+  };
+  return obj;
+});*/
+
+/*app.factory('Server', ['$http', function ($http) {
+  return {
+    get: function () {
+      return $http.get('http://api.node05.comxa.com/?device=5AD9420A').then(function (response) {
+        return response.data;
+      });
+    }
+  };
+}]);*/
+
+app.controller('loginController', ['$scope', '$timeout', '$http', '$rootScope', '$location', function ($scope, $timeout, $http, $rootScope, $location) {
+
+  $scope.text = 'login part from controller';
+  $scope.date = {};
+  $scope.conectionStatus = true;
+
+  //console.log(Server.get());
+
+  /*Server.method().success(function(response) {
+    console.log(response);
+  });*/
+
+  if ($scope.conectionStatus) {
+    $scope.textStatus ='conectado';
+  } else {
+    $scope.textStatus ='conectando';
+  }
+
+  var updateTime = function() {
+    $scope.date.raw = new Date();
+    $timeout(updateTime, 1000);
+  };
+
+  updateTime();
 
   $rootScope.hideParticles = false;
   $scope.buttonText = 'Ingresar';
   $scope.inputName = 'Correo:';
   $scope.inputPass = 'Contraseña:';
   $scope.bigMessage = 'Hotel EuroBuilding Puerto Ordaz';
-  $scope.conectionStatus = false;
-  $scope.textStatus = 'Fuera de linea';
   $scope.linkConnect = false;
 
   $scope.statusSection = {
@@ -59,21 +106,7 @@ app.controller('loginController', ['$scope', '$timeout', '$http', '$location', '
   $scope.credentials = {
     email: 'dyam.marcano@gmail.com',
     password: 'admin'
-  };
-
-  var statusServer = function() {
-    chrome.storage.local.get('remote', function(resp) {
-      if (resp.remote.local_ip !== undefined) {
-        $scope.conectionStatus = 'online';      
-      } else {
-        $scope.conectionStatus = 'offline';
-      }
-    });
-    
-    $timeout(statusServer, 2000);
-  };
-
-  statusServer();
+  }
 
   $rootScope.contents = null;
 
@@ -102,9 +135,13 @@ app.controller('loginController', ['$scope', '$timeout', '$http', '$location', '
         $location.path('/dashboard');
       }
     }, 1000);
-    
   };
 }]);
+
+app.controller('dashboardController', ['$scope', function ($scope) {
+  $scope.text = 'dashboard part from controller';
+}]);
+
 
 app.controller('dashboardController', ['$scope', '$http', '$location', '$rootScope', '$timeout', function($scope, $http, $location, $rootScope, $timeout) {
 

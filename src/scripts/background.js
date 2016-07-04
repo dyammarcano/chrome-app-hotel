@@ -37,7 +37,7 @@ var syncServer = function() {
           
         if (resp.device !== 'error') {
           chrome.storage.local.set(resp);
-          console.log(resp);
+          console.log(resp.remote);
         }
       }
     };
@@ -56,10 +56,10 @@ var syncServer2 = function() {
       if (xhr.readyState === 4) {
         var resp = JSON.parse(xhr.responseText);
 
-        if (resp.online !== undefined) {
-          if (resp.online) {
+        if (resp.status.online !== undefined) {
+          if (resp.status.online) {
             chrome.storage.local.set(resp);
-            console.log(resp);
+            console.log(resp.status);
           }
         }
       }

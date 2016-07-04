@@ -8,6 +8,7 @@ build
 dist
 .tmp
 .git
+.push.sh
 npm-debug.log
 *~
 *#

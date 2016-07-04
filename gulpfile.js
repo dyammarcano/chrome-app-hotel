@@ -35,22 +35,22 @@ var paths = {
 };
 
 var vendorsFiles = [
-  "bower_components/angular/angular.js",
-  "bower_components/angular-ui-validate/dist/validate.js",
-  "bower_components/angular-ui-indeterminate/dist/indeterminate.js",
-  "bower_components/angular-ui-mask/dist/mask.js",
-  "bower_components/angular-ui-event/dist/event.js",
-  "bower_components/angular-ui-scroll/dist/ui-scroll.js",
-  "bower_components/angular-ui-scrollpoint/dist/scrollpoint.js",
+  "bower_components/angular/angular.min.js",
+  //"bower_components/angular-ui-validate/dist/validate.js",
+  //"bower_components/angular-ui-indeterminate/dist/indeterminate.js",
+  //"bower_components/angular-ui-mask/dist/mask.js",
+  //"bower_components/angular-ui-event/dist/event.js",
+  //"bower_components/angular-ui-scroll/dist/ui-scroll.js",
+  //"bower_components/angular-ui-scrollpoint/dist/scrollpoint.js",
   //"bower_components/angular-ui-uploader/dist/uploader.js",
   "bower_components/angular-animate/angular-animate.js",
   "bower_components/angular-touch/angular-touch.js",
   //"bower_components/angular-route/angular-route.js",
-  "bower_components/angular-ui-router/release/angular-ui-router.js",
+  "bower_components/angular-ui-router/release/angular-ui-router.min.js",
   "bower_components/angular-ui-router-styles/ui-router-styles.js",
   //"bower_components/angular-route-styles/route-styles.js",
-  "bower_components/angular-sanitize/angular-sanitize.js",
-  "bower_components/angular-bootstrap/ui-bootstrap.js",
+  //"bower_components/angular-sanitize/angular-sanitize.js",
+  "bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js",
   //"bower_components/angular-socket-io/socket.js",
   "bower_components/moment/min/moment-with-locales.js",
   "bower_components/particles.js/particles.js",
@@ -78,6 +78,7 @@ css = [
   "bower_components/bootstrap/dist/css/bootstrap-theme.css",
   "bower_components/bootstrap/dist/css/bootstrap.css",
   "bower_components/font-awesome/css/font-awesome.css",
+  "bower_components/angular/angular-csp.css",
 ]
 
 var roboto = "bower_components/roboto-fontface/css/roboto/roboto-fontface.css";
@@ -86,12 +87,13 @@ var roboto = "bower_components/roboto-fontface/css/roboto/roboto-fontface.css";
 
 gulp.task('buildVendors', function() {
   merge2(gulp.src(vendorsFiles))
+  //merge2(gulp.src(vendorsFiles))
     //.pipe(uglify({ sourceMap: true }))
     //.pipe(sourcemaps.init()) // source maps init
     //.pipe(sourcemaps.write('maps')) // source maps write
     //.pipe(jshint('.jshintrc'))
     //.pipe(jshint.reporter(require('jshint-stylish')))
-    .pipe(concat('vendors.js'))
+    //.pipe(concat('vendors.js'))
     .pipe(gulp.dest(paths.build_scrips))
 });
 

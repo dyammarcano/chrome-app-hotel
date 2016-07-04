@@ -1,13 +1,21 @@
 doctype html
-html(ng-app="mainApp", ui-router-styles='')
+html(ng-app='MainApp', ui-router-styles='', ng-csp='')
   head
-    meta(charset="utf-8")
-    link(rel="stylesheet", href="../styles/font-awesome.css")
-    link(rel="stylesheet", href="../styles/bootstrap.css")
-    link(rel="stylesheet", href="../styles/roboto/roboto-fontface.css")
+    meta(charset='utf-8')
+    link(rel='stylesheet', href='../styles/bootstrap.css')
+    link(rel='stylesheet', href='../styles/font-awesome.css')
+    link(rel='stylesheet', href='../styles/sandstone.css')
+    link(rel='stylesheet', href='../styles/angular-csp.css')
   body
 
-    div(ui-view="")
+    div.particles 
+      //script(type='text/javascript').
+      //  particlesJS.load('particles', '../config/particles.json');
 
-    script(type="text/javascript", src="../scripts/vendors.js")
-    script(type="text/javascript", src="../scripts/app.js")
+    div(ui-view='main')
+
+    script(src='../scripts/angular.min.js')
+    script(src='../scripts/angular-ui-router.min.js')
+    script(src='../scripts/ui-router-styles.js')
+    script(src='../scripts/ui-bootstrap-tpls.min.js')
+    script(src='../scripts/app.js')
