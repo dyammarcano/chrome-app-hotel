@@ -12,7 +12,7 @@ var jshint      = require('gulp-jshint');
 var clean       = require('gulp-clean');
 var zip         = require('gulp-zip');
 var sourcemaps  = require('gulp-sourcemaps');
-var minifyHtml  = require('gulp-minify-html');
+//var minifyHtml  = require('gulp-minify-html');
 //var minifyCss   = require('gulp-clean-css');
 //var browserify  = require('gulp-browserify');
 var rename      = require('gulp-rename');
@@ -22,16 +22,17 @@ var util        = require('util');
 //var templateCache = require('gulp-angular-templatecache');
 
 var paths = {
+  css:            'src/styles/*.css',
   pug:            'src/views/**/*.pug',
   styles:         'src/styles/**/*.styl',
-  scripts:        'src/scripts/**/*.js',
+  scripts:        'src/javascripts/**/*.js',
   images:         'src/images/**/*',
   chrome:         'src/chrome/**/*',
   temp_dir:       '.tmp/scripts',
   build_html:     'build/views',
   build_styles:   'build/styles',
   build_images:   'build/images',
-  build_scrips:   'build/scripts',
+  build_scrips:   'build/javascripts',
   compile_scrips: 'src/scripts',
 };
 
@@ -138,7 +139,7 @@ gulp.task('copy', function() {
     //.pipe(imagemin({ optimizationLevel: 1 }))
     .pipe(gulp.dest(paths.build_images));
 
-  gulp.src(css)
+  gulp.src(paths.css)
     //.pipe(minifyCss())
     .pipe(gulp.dest(paths.build_styles));
     

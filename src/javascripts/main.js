@@ -26,7 +26,7 @@ app.config(['$stateProvider', '$urlRouterProvider', 'primusProvider', function (
     url:'/',
     views: {
       'content': {
-        templateUrl: 'login/login.html',
+        templateUrl: 'login.html',
         controller: 'loginCtrl'
       }
     }
@@ -52,16 +52,16 @@ app.config(['$stateProvider', '$urlRouterProvider', 'primusProvider', function (
     views: {
       'header': {
         //abstract: true,
-        templateUrl: 'dashboard/header.html',
+        templateUrl: 'header.html',
         controller: 'headerCtrl',
       },
       'content': {
-        templateUrl: 'dashboard/home.html',
+        templateUrl: 'home.html',
         controller: 'homeCtrl',
       },
       'sidebar': {
         //abstract: true,
-        templateUrl: 'dashboard/sidebar.html',
+        templateUrl: 'sidebar.html',
         controller: 'sidebarCtrl',
       }
     }
@@ -81,16 +81,16 @@ app.config(['$stateProvider', '$urlRouterProvider', 'primusProvider', function (
     views: {
       'header': {
         //abstract: true,
-        templateUrl: 'dashboard/header.html',
+        templateUrl: 'header.html',
         controller: 'headerCtrl',
       },
       'content': {
-        templateUrl: 'dashboard/home.html',
+        templateUrl: 'home.html',
         controller: 'homeCtrl',
       },
       'sidebar': {
         //abstract: true,
-        templateUrl: 'dashboard/sidebar.html',
+        templateUrl: 'sidebar.html',
         controller: 'sidebarCtrl',
       }
     }
