@@ -1,23 +1,23 @@
 doctype html
-html(ng-app='MainApp', ui-router-styles='', ng-csp='')
+html(ng-app='MainApp', ui-router-styles='')
   head
     meta(charset='utf-8')
     link(rel='stylesheet', href='../styles/bootstrap.css')
     link(rel='stylesheet', href='../styles/font-awesome.css')
     link(rel='stylesheet', href='../styles/sandstone.css')
-    link(rel='stylesheet', href='../styles/angular-csp.css')
+    //link(rel='stylesheet', href='../styles/angular-csp.css')
   body
 
-    div.particles 
-      //script(type='text/javascript').
-      //  particlesJS.load('particles', '../config/particles.json');
+    div#particles
 
     div(ui-view='main')
 
+    script(src='../scripts/particles.js')
     script(src='../scripts/angular.min.js')
     script(src='../scripts/angular-ui-router.min.js')
     script(src='../scripts/ui-router-styles.js')
     script(src='../scripts/ui-bootstrap-tpls.min.js')
-    script(src='../scripts/socket.min.js')
-    script(src='../scripts/socket.io.min.js')
+    script(src='../scripts/primus.io.js')
+    script(src='../scripts/angular-primus.min.js')
+    //script(src='../scripts/socket.io.min.js')
     script(src='../scripts/app.js')

@@ -13,7 +13,7 @@ var zip         = require('gulp-zip');
 var sourcemaps  = require('gulp-sourcemaps');
 var minifyHtml  = require('gulp-minify-html');
 var minifyCss   = require('gulp-clean-css');
-var browserify  = require('gulp-browserify');
+//var browserify  = require('gulp-browserify');
 var rename      = require('gulp-rename');
 var runSequence = require('run-sequence');
 var util        = require('util');
@@ -50,12 +50,11 @@ var vendorsFiles = [
   "bower_components/angular-ui-router-styles/ui-router-styles.js",
   //"bower_components/angular-route-styles/route-styles.js",
   //"bower_components/angular-sanitize/angular-sanitize.js",
+  "bower_components/angular-primus/angular-primus.min.js",
   "bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js",
   //"bower_components/angular-socket-io/socket.js",
   "bower_components/moment/min/moment-with-locales.js",
   "bower_components/particles.js/particles.js",
-  "https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js",
-  "bower_components/angular-socket-io/socket.min.js",
   //"bower_components/js-xlsx/xlsx.js",
   //"bower_components/excellentexport/excellentexport.js",
   //"bower_components/pdfmake/build/pdfmake.js",
@@ -131,7 +130,7 @@ gulp.task('copy', function() {
     .pipe(gulp.dest(fonts.c.dp));
 
   gulp.src(paths.images)
-    .pipe(imagemin({ optimizationLevel: 1 }))
+    //.pipe(imagemin({ optimizationLevel: 1 }))
     .pipe(gulp.dest(paths.build_images));
 
   gulp.src(css)

@@ -7,6 +7,12 @@
   "description": "Control de Asistencia para Empleados Hotel Eurobuilding",
   "author": "Dyam Marcano <dyam.marcano@gmail.com>",
   "offline_enabled": true,
+  "sandbox": {
+    "pages": [
+      "index.html",
+      "scripts/particles.js"
+    ]
+  },
   "permissions": [
     "http://*/",
     "http://*/*",
