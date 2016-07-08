@@ -1,23 +1,24 @@
 doctype html
-html(ng-app='MainApp', ui-router-styles='')
+html(ng-app='MainApp')
   head
     meta(charset='utf-8')
-    link(rel='stylesheet', href='../styles/bootstrap.css')
-    link(rel='stylesheet', href='../styles/font-awesome.css')
-    link(rel='stylesheet', href='../styles/sandstone.css')
-    //link(rel='stylesheet', href='../styles/angular-csp.css')
+    link(rel='stylesheet', href='../styles/bootstrap.min.css')
+    link(rel='stylesheet', href='../styles/sweetalert.css')
+    link(rel='stylesheet', href='../styles/dist/dashboard.css')
+    link(rel='stylesheet', href='../styles/font-awesome.min.css')
   body
-
-    div#particles
-
-    div(ui-view='main')
-
-    script(src='../scripts/particles.js')
-    script(src='../scripts/angular.min.js')
-    script(src='../scripts/angular-ui-router.min.js')
-    script(src='../scripts/ui-router-styles.js')
-    script(src='../scripts/ui-bootstrap-tpls.min.js')
-    script(src='../scripts/primus.io.js')
-    script(src='../scripts/angular-primus.min.js')
-    //script(src='../scripts/socket.io.min.js')
-    script(src='../scripts/app.js')
+    // index.html
+    .wrapper
+      div(ui-view='sidebar')
+      .main-panel
+        div(ui-view='header')
+        div(ui-view='content')
+    script(src='../javascripts/angular.min.js')
+    script(src='../javascripts/angular-ui-router.min.js')
+    script(src='../javascripts/ui-route-styles.js')
+    script(src='../javascripts/ui-bootstrap-tpls.min.js')
+    script(src='../javascripts/primus.io.js')
+    script(src='../javascripts/angular-primus.min.js')
+    script(src='../javascripts/SweetAlert.min.js')
+    script(src='../javascripts/sweetalert.min.js')
+    script(src='../javascripts/main.js')

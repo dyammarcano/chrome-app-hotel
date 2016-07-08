@@ -1,6 +1,7 @@
 var merge2      = require('merge2');
+var config      = require('config.json');
 var gulp        = require('gulp');
-var coffee      = require('gulp-coffee');
+//var coffee      = require('gulp-coffee');
 var stylus      = require('gulp-stylus');
 var concat      = require('gulp-concat');
 var pug         = require('gulp-pug');
@@ -12,13 +13,13 @@ var clean       = require('gulp-clean');
 var zip         = require('gulp-zip');
 var sourcemaps  = require('gulp-sourcemaps');
 var minifyHtml  = require('gulp-minify-html');
-var minifyCss   = require('gulp-clean-css');
+//var minifyCss   = require('gulp-clean-css');
 //var browserify  = require('gulp-browserify');
 var rename      = require('gulp-rename');
-var runSequence = require('run-sequence');
+//var runSequence = require('run-sequence');
 var util        = require('util');
-var stylint     = require('gulp-stylint');
-var templateCache = require('gulp-angular-templatecache');
+//var stylint     = require('gulp-stylint');
+//var templateCache = require('gulp-angular-templatecache');
 
 var paths = {
   pug:            'src/views/**/*.pug',
@@ -86,7 +87,8 @@ var roboto = "bower_components/roboto-fontface/css/roboto/roboto-fontface.css";
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('buildVendors', function() {
+
+/*gulp.task('buildVendors', function() {
   merge2(gulp.src(vendorsFiles))
   //merge2(gulp.src(vendorsFiles))
     //.pipe(uglify({ sourceMap: true }))
@@ -96,22 +98,25 @@ gulp.task('buildVendors', function() {
     //.pipe(jshint.reporter(require('jshint-stylish')))
     //.pipe(concat('vendors.js'))
     .pipe(gulp.dest(paths.build_scrips))
-});
+});*/
 
-gulp.task('buildPug', ['copy'], function() {
+
+/*gulp.task('pug', function() {
   gulp.src(paths.pug)
     .pipe(pug({ pretty: true }))
     //.pipe(minifyHtml({ empty: true }))
     .pipe(gulp.dest(paths.build_html));
-});
+});*/
 
-gulp.task('buildStyles', function() {
+
+/*gulp.task('buildStyles', function() {
   gulp.src(paths.styles)
     .pipe(stylint({config: '.stylintrc'}))
     .pipe(stylint.reporter())
     .pipe(stylus({ compress: true }))
     .pipe(gulp.dest(paths.build_styles));
-});
+});*/
+
 
 gulp.task('copy', function() {
   gulp.src(paths.scripts)
@@ -134,32 +139,33 @@ gulp.task('copy', function() {
     .pipe(gulp.dest(paths.build_images));
 
   gulp.src(css)
-    .pipe(minifyCss())
+    //.pipe(minifyCss())
     .pipe(gulp.dest(paths.build_styles));
     
   gulp.src(roboto)
-    .pipe(minifyCss())
+    //.pipe(minifyCss())
     .pipe(gulp.dest(paths.build_styles + '/roboto'));
 });
 
-gulp.task('pack', function() {
+
+/*gulp.task('pack', function() {
   runSequence(['buildStyles', 'buildVendors', 'buildPug']);
-});
+});*/
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('clean', function(cb) {
-  util.log('clean task executed.');
+
+gulp.task('clean', function() {
   gulp.src('dist', { read: false })
     .pipe(clean());
 
   gulp.src('build', { read: false })
     .pipe(clean());
 
-  gulp.src('.tmp', { read: false })
-    .pipe(clean());
-  cb();
+  /*gulp.src('.tmp', { read: false })
+    .pipe(clean());*/
 });
+
 
 gulp.task('pug', function() {
   gulp.src(paths.pug)
@@ -168,58 +174,64 @@ gulp.task('pug', function() {
     .pipe(gulp.dest(paths.build_html));
 });
 
-gulp.task('styles', function() {
+
+/*gulp.task('styles', function() {
   gulp.src(paths.styles)
     .pipe(stylint({config: '.stylintrc'}))
     .pipe(stylint.reporter())
     .pipe(stylus({ compress: true }))
     .pipe(gulp.dest(paths.build_styles));
-});
+});*/
+
 
 gulp.task('styles', function() {
-  gulp.src('build', { read: false })
-    .pipe(clean());
+  /*gulp.src('build', { read: false })
+    .pipe(clean());*/
     
-  gulp.src('dashboard.styl')
+  gulp.src('src/styles/dashboard.styl')
     .pipe(sourcemaps.init())
     .pipe(stylus({ compress: true, linenos: false }))
     .pipe(rename('dashboard.min.css'))
     .pipe(sourcemaps.write('map'))
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest(paths.build_styles));
 });
+
 
 gulp.task('styles-dev', function() {
-  gulp.src('dashboard.styl')
+  gulp.src('src/styles/dashboard.styl')
     .pipe(stylus({ compress: false, linenos: true }))
     .pipe(rename('dashboard.css'))
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest(paths.build_styles));
 });
 
-gulp.task('zip', function() {
-  util.log('zip task executed.');
-  var manifest = JSON.parse(require('fs').readFileSync('./src/chrome/manifest.json'));
-  gulp.src(['build/**', '!build/scripts/**/*.map', '!build/styles/**/*.map'])
-    .pipe(zip(manifest.name + ' v' + manifest.version + '.zip'))
-    .pipe(gulp.dest('dist'));
-});
 
-gulp.task('cfg', function() {
+//gulp.task('zip', function() {
+//  var manifest = JSON.parse(require('fs').readFileSync('./src/chrome/manifest.json'));
+//  gulp.src(['build/**', '!build/scripts/**/*.map', '!build/styles/**/*.map'])
+//    .pipe(zip(manifest.name + ' v' + manifest.version + '.zip'))
+//    .pipe(gulp.dest('dist'));
+//});
+
+
+/*gulp.task('cfg', function() {
   gulp.src(paths.chrome)
     .pipe(gulp.dest('build'));
-});
+});*/
+
 
 gulp.task('js', function() {
   gulp.src(paths.scripts)
     .pipe(gulp.dest(paths.build_scrips));
 });
 
+
 gulp.task('watch', function() {
-  gulp.watch(paths.pug,    ['pug']);
-  gulp.watch(paths.scripts, ['js']);
-  gulp.watch(paths.chrome, ['cfg']);
-  gulp.watch(paths.styles, ['styles']);
-  gulp.watch('./**/*.styl', ['styles-dev']);
+  gulp.watch(paths.scripts,  ['js']);
+  gulp.watch(paths.pug,      ['pug']);
+  gulp.watch(paths.chrome,   ['cfg']);
+  gulp.watch('styles/**/*.styl',  ['styles']);
 });
+
 
 //gulp.task('webserver', function() {
   //connect.server({
@@ -229,11 +241,13 @@ gulp.task('watch', function() {
   //});
 //});
 
+
 //gulp.task('livereload', function() {
   //gulp.src(['dist/**/*.*'])
     //.pipe(watch(['dist/**/*.*']))
     //.pipe(connect.reload());
 //});
 
-gulp.task('prod',    ['scripts', 'copy', 'styles', 'pug', 'vendors', 'zip']);
-gulp.task('default', ['pack', 'watch']);
+
+//gulp.task('prod',    ['scripts', 'copy', 'styles', 'pug', 'vendors', 'zip']);
+gulp.task('default', ['styles', 'pug', 'copy', 'js']);

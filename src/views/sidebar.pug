@@ -1,0 +1,16 @@
+// sidebar.html
+.sidebar(data-color='azure', data-image='../images/sidebar/3dscuares1.jpg')
+  // | gray | blue | azure | green | orange | red | purple |
+  .sidebar-wrapper
+    // <div class="logo"><a ui-sref="http://www.creative-tim.com" class="simple-text">Creative Tim</a></div>
+    ul.nav
+      li(ui-sref-active='active', ng-repeat='item in sidebar')
+        a(ui-sref='{{ item.url }}')
+          i(class='{{ item.icon }}')
+          p {{ item.name }}
+        ul.nav
+          li(ui-sref-active='active', ng-repeat='sub in item.permisions')
+            a(ui-sref='{{ sub.url }}')
+              i(class='{{ sub.icon }}')
+              p {{ sub.name }}
+  .sidebar-background(style='background-image: url(../images/sidebar/3dscuares1.jpg) ')
