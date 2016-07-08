@@ -1,0 +1,5 @@
+[{
+  "name": "Salir",
+  "function": "logout()",
+  "icon": "fa fa-sign-out"
+}]

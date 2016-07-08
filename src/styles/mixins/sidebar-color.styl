@@ -1,0 +1,11 @@
+sidebar_color($pre, $pos, $clr)
+  .sidebar[data-color={$clr}]:after,
+  body > .navbar-collapse[data-color={$clr}]:after
+    background $pre
+    background -moz-linear-gradient(top, $pre 0%, $pos 100%)
+    background -webkit-gradient(linear, left top, left bottom, color-stop(0%, $pre), color-stop(100%, $pos))
+    background -webkit-linear-gradient(top, $pre 0%, $pos 100%)
+    background -o-linear-gradient(top, $pre 0%, $pos 100%)
+    background -ms-linear-gradient(top, $pre 0%, $pos 100%)
+    background linear-gradient(to bottom, $pre 0%, $pos 100%)
+    background-size 150% 150%

@@ -1,0 +1,352 @@
+$sidebar_size = 230px
+
+/*      light colors         */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-moz-keyframes spin {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+  to {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-ms-keyframes spin {
+  from {
+    -ms-transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+  }
+}
+
+body,
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6,
+p,
+.navbar,
+.brand,
+.btn-simple,
+.alert,
+a,
+.td-name,
+td,
+button.close
+  -moz-osx-font-smoothing grayscale
+  -webkit-font-smoothing antialiased
+  font-family "Roboto","Helvetica Neue",Arial,sans-serif
+  font-weight 400
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4
+  font-weight 300
+  margin 30px 0 15px
+
+h1, .h1
+  font-size 52px
+
+h2, .h2
+  font-size 36px
+
+h3, .h3
+  font-size 28px
+  margin 20px 0 10px
+
+h4, .h4
+  font-size 22px
+  line-height 30px
+
+h5, .h5
+  font-size 16px
+  margin-bottom 15px
+
+h6, .h6
+  font-size 14px
+  font-weight 600
+  text-transform uppercase
+
+p
+  font-size 16px
+  line-height 1.5
+
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small, h1 .small, h2 .small, h3 .small, h4 .small, h5 .small, h6 .small, .h1 .small, .h2 .small, .h3 .small, .h4 .small, .h5 .small, .h6 .small
+  color $color_0152
+  font-weight 300
+  line-height 1.5
+
+h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small
+  font-size 60%
+
+h1
+  .subtitle
+    display block
+    margin 0 0 30px
+
+.text-muted
+  color $color_0152
+
+.text-primary, .text-primary:hover
+  color $color_0151 !important
+
+.text-info, .text-info:hover
+  color $color_0150 !important
+
+.text-success, .text-success:hover
+  color $color_0003 !important
+
+.text-warning, .text-warning:hover
+  color $color_0149 !important
+
+.text-danger, .text-danger:hover
+  color $color_0155 !important
+
+body,
+.wrapper 
+  min-height 100vh
+  position relative
+
+.sidebar
+  position absolute
+  top 0
+  bottom 0
+  left 0
+  width $sidebar_size
+  display block
+  z-index 1
+  color $color_0145
+  font-weight 200
+  background-size cover
+  background-position center center
+  .sidebar-wrapper
+    position relative
+    max-height none
+    min-height 100%
+    overflow hidden
+    width $sidebar_size
+    z-index 4
+  .sidebar-background
+    position absolute
+    z-index 1
+    height 100%
+    width 100%
+    display block
+    top 0
+    left 0
+    background-size cover
+    background-position center center
+  .logo
+    padding 10px 15px
+    border-bottom 1px solid rgba(255, 255, 255, 0.2)
+    p
+      float left
+      font-size 20px
+      margin 10px 10px
+      color $color_0145
+      line-height 20px
+      font-family "Helvetica Neue", Helvetica, Arial, sans-serif
+    .simple-text
+      text-transform uppercase
+      padding 5px 0px
+      display block
+      font-size 18px
+      color $color_0145
+      text-align center
+      font-weight 400
+      line-height 30px
+  .logo-tim
+    border-radius 50%
+    border 1px solid #333
+    display block
+    height 61px
+    width 61px
+    float left
+    overflow hidden
+    img
+      width 60px
+      height 60px
+  .nav
+    margin-top 20px
+    li
+      & > a
+        color $color_0145
+        margin 5px 15px
+        opacity .86
+        border-radius 4px
+      &:hover
+        & > a
+          background alpha($color_0145, 0.13)
+          opacity 1
+      &.active
+        & > a
+          color $color_0145
+          opacity 1
+          background alpha($color_0145, 0.23)
+    p
+      margin 0
+      line-height 30px
+      font-size 12px
+      font-weight 600
+      text-transform uppercase
+    i
+      font-size 19px
+      float left
+      margin-right 5px
+      line-height 28px
+      width 28px
+      text-align center
+
+.sidebar .logo,
+body > .navbar-collapse .logo
+  padding 10px 15px
+  border-bottom 1px solid alpha($color_0145, 0.2)
+
+.sidebar .logo p,
+body > .navbar-collapse .logo p
+  float left
+  font-size 20px
+  margin 10px 10px
+  color $color_0145
+  line-height 20px
+  font-family "Helvetica Neue", Helvetica, Arial, sans-serif
+
+.sidebar .logo .simple-text,
+body > .navbar-collapse .logo .simple-text
+  text-transform uppercase
+  padding 5px 0px
+  display block
+  font-size 18px
+  color $color_0145
+  text-align center
+  font-weight 400
+  line-height 30px
+
+.sidebar .logo-tim,
+body > .navbar-collapse .logo-tim
+  border-radius 50%
+  border 1px solid #333
+  display block
+  height 61px
+  width 61px
+  float left
+  overflow hidden
+
+.sidebar .logo-tim img,
+body > .navbar-collapse .logo-tim img
+  width 60px
+  height 60px
+
+.sidebar:after, .sidebar:before,
+body > .navbar-collapse:after,
+body > .navbar-collapse:before
+  display block
+  content ""
+  position absolute
+  width 100%
+  height 100%
+  top 0
+  left 0
+  z-index 2
+
+.sidebar:before,
+body > .navbar-collapse:before
+  opacity .33
+  background $color_0008
+
+.sidebar:after,
+body > .navbar-collapse:after
+  background $color_0168
+  background -moz-linear-gradient(top, $color_0168 0%, $color_0169 100%)
+  background -webkit-gradient(linear, left top, left bottom, color-stop(0%, $color_0168), color-stop(100%, $color_0169))
+  background -webkit-linear-gradient(top, $color_0168 0%, $color_0169 100%)
+  background -o-linear-gradient(top, $color_0168 0%, $color_0169 100%)
+  background -ms-linear-gradient(top, $color_0168 0%, $color_0169 100%)
+  background linear-gradient(to bottom, $color_0168 0%, $color_0169 100%)
+  background-size 150% 150%
+  z-index 3
+  opacity 1
+
+.sidebar[data-image]:after, .sidebar.has-image:after,
+body > .navbar-collapse[data-image]:after,
+body > .navbar-collapse.has-image:after
+  opacity .77
+
+sidebar_color($color_0156, $color_0157, 'red')     // generated by @import 'mixins/sidebar_color'
+sidebar_color($color_0158, $color_0159, 'gray')    // generated by @import 'mixins/sidebar_color'
+sidebar_color($color_0160, $color_0161, 'blue')    // generated by @import 'mixins/sidebar_color'
+sidebar_color($color_0150, $color_0162, 'azure')   // generated by @import 'mixins/sidebar_color'
+sidebar_color($color_0163, $color_0164, 'green')   // generated by @import 'mixins/sidebar_color'
+sidebar_color($color_0163, $color_0165, 'orange')  // generated by @import 'mixins/sidebar_color'
+sidebar_color($color_0166, $color_0167, 'purple')  // generated by @import 'mixins/sidebar_color'
+
+.main-panel
+  background rgba(203, 203, 210, 0.15)
+  position relative
+  z-index 2
+  float right
+  width 'calc(100% - %s)' % ($sidebar_size)
+  min-height 100%
+  & > .content
+    padding 30px 15px
+    min-height: 'calc(100% - %s)' % ($sidebar_size - 107)
+  & > .footer
+    border-top 1px solid $color_0154
+  .navbar
+    margin-bottom 0
+
+.sidebar,
+.main-panel
+  overflow auto
+  max-height 100%
+  height 100%
+  -webkit-transition-property top,bottom
+  transition-property top,bottom
+  -webkit-transition-duration .2s,.2s
+  transition-duration .2s,.2s
+  -webkit-transition-timing-function linear,linear
+  transition-timing-function linear,linear
+  -webkit-overflow-scrolling touch
+
+.btn
+  border-width 2px
+  background-color transparent
+  font-weight 400
+  opacity 0.8
+  //filter: alpha(opacity=80);
+  padding 8px 16px
+  border-color $color_0153
+  color $color_0153
+
+.footer
+  &:not(.footer-big)
+    nav
+      & > ul
+        li
+          &:first-child
+            margin-left 0
+
+.footer
+  nav
+    &.pull-left
+      float none !important
+  &:not(.footer-big)
+    nav
+      & > ul
+        li
+          float none

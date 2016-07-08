@@ -176,6 +176,25 @@ gulp.task('styles', function() {
     .pipe(gulp.dest(paths.build_styles));
 });
 
+gulp.task('styles', function() {
+  gulp.src('build', { read: false })
+    .pipe(clean());
+    
+  gulp.src('dashboard.styl')
+    .pipe(sourcemaps.init())
+    .pipe(stylus({ compress: true, linenos: false }))
+    .pipe(rename('dashboard.min.css'))
+    .pipe(sourcemaps.write('map'))
+    .pipe(gulp.dest('dist'));
+});
+
+gulp.task('styles-dev', function() {
+  gulp.src('dashboard.styl')
+    .pipe(stylus({ compress: false, linenos: true }))
+    .pipe(rename('dashboard.css'))
+    .pipe(gulp.dest('dist'));
+});
+
 gulp.task('zip', function() {
   util.log('zip task executed.');
   var manifest = JSON.parse(require('fs').readFileSync('./src/chrome/manifest.json'));
@@ -199,6 +218,7 @@ gulp.task('watch', function() {
   gulp.watch(paths.scripts, ['js']);
   gulp.watch(paths.chrome, ['cfg']);
   gulp.watch(paths.styles, ['styles']);
+  gulp.watch('./**/*.styl', ['styles-dev']);
 });
 
 //gulp.task('webserver', function() {

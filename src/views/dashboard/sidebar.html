@@ -1,0 +1,22 @@
+<!-- sidebar.html -->
+<div data-color="azure" data-image="../images/sidebar/3dscuares1.jpg" class="sidebar">
+  <!-- | gray | blue | azure | green | orange | red | purple | -->
+  <div class="sidebar-wrapper">
+    <!-- <div class="logo"><a ui-sref="http://www.creative-tim.com" class="simple-text">Creative Tim</a></div> -->
+
+    <ul class="nav">
+      <li ui-sref-active = "active" ng-repeat = "item in sidebar">
+        <a ui-sref="{{ item.url }}"><i class="{{ item.icon }}"></i><p>{{ item.name }}</p></a>
+        
+        <ul class="nav">
+          <li ui-sref-active = "active" ng-repeat = "sub in item.permisions">
+            <a ui-sref="{{ sub.url }}"><i class="{{ sub.icon }}"></i><p>{{ sub.name }}</p></a>
+          </li>
+        </ul>
+
+      </li>
+    </ul>
+
+  </div>
+  <div style="background-image: url(../images/sidebar/3dscuares1.jpg) " class="sidebar-background"></div>
+</div>
