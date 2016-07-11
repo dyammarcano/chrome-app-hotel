@@ -1,4 +1,33 @@
-var app = angular.module('MainApp', ['primus', 'ui.router', 'ui.bootstrap', 'oitozero.ngSweetAlert']);
+require('angular');
+require('moment');
+var _ = require('lodash');
+require('angular-sweetalert');
+require('angular-bootstrap');
+require('angular-ui-router');
+require('angular-moment');
+require('angular-chrome-messaging');
+
+function OptionsController(ChromeBindings, ChromeMessaging) {
+  // Bind `ChromeMessagingExample.user` to `OptionsController.user`
+  this.user = {};
+  ChromeBindings.bindVariable('ChromeMessagingExample', 'user').to(this, 'user');
+
+  var vm = this;
+
+  vm.inputEmail = '';
+  vm.inputName = '';
+
+  vm.login = function () {
+    ChromeMessaging.callMethod('ChromeMessagingExample', 'login', {
+      email: vm.inputEmail,
+      name: vm.inputName
+    }).then(function (user) {
+      console.log('Logged in as:', user);
+    });
+  };
+}
+
+var app = angular.module('MainApp', ['ui.router', 'ui.bootstrap', 'oitozero.ngSweetAlert', 'angularMoment']);
 
 //https://www.youtube.com/watch?v=BNtw6P77qpE
 //http://gohooey.com/demo/sidebar/bootstrapnavigation/hoedemo.html
@@ -6,28 +35,18 @@ var app = angular.module('MainApp', ['primus', 'ui.router', 'ui.bootstrap', 'oit
 app.constant('API', 'http://192.168.1.50:3000');
 
 
-app.config(['$stateProvider', '$urlRouterProvider', 'primusProvider', function ($stateProvider, $urlRouterProvider, primusProvider) {
-
-  /*primusProvider.setEndpoint(API);
-
-  primusProvider.setOptions({
-    reconnect: {
-      minDelay: 100,
-      maxDelay: 60000
-    }
-  });
-
-  primusProvider.setDefaultMultiplex(false);*/
+app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
   $urlRouterProvider.otherwise('/home');
 
+  //console.log(this);
 
   $stateProvider.state('login', {
     url:'/',
     views: {
       'content': {
         templateUrl: 'login.html',
-        controller: 'loginCtrl'
+        controller: 'loginController'
       }
     }
   });
@@ -53,16 +72,16 @@ app.config(['$stateProvider', '$urlRouterProvider', 'primusProvider', function (
       'header': {
         //abstract: true,
         templateUrl: 'header.html',
-        controller: 'headerCtrl',
+        controller: 'headerController',
       },
       'content': {
         templateUrl: 'home.html',
-        controller: 'homeCtrl',
+        controller: 'homeController',
       },
       'sidebar': {
         //abstract: true,
         templateUrl: 'sidebar.html',
-        controller: 'sidebarCtrl',
+        controller: 'sidebarController',
       }
     }
   });
@@ -82,16 +101,16 @@ app.config(['$stateProvider', '$urlRouterProvider', 'primusProvider', function (
       'header': {
         //abstract: true,
         templateUrl: 'header.html',
-        controller: 'headerCtrl',
+        controller: 'headerController',
       },
       'content': {
         templateUrl: 'home.html',
-        controller: 'homeCtrl',
+        controller: 'homeController',
       },
       'sidebar': {
         //abstract: true,
         templateUrl: 'sidebar.html',
-        controller: 'sidebarCtrl',
+        controller: 'sidebarController',
       }
     }
   });
@@ -99,25 +118,23 @@ app.config(['$stateProvider', '$urlRouterProvider', 'primusProvider', function (
 }]);
 
 
-app.controller('headerCtrl', ['$scope', 'headerButtons', function ($scope, headerButtons) {
+app.controller('headerController', ['$scope', 'headerButtons', function ($scope, headerButtons) {
   $scope.header  = headerButtons.data;
   //console.log(headerButtons.data);
 }]);
 
-app.controller('homeCtrl', ['$scope', function ($scope) {
+app.controller('homeController', ['$scope', function ($scope) {
 
 }]);
 
-app.controller('sidebarCtrl', ['$scope', 'sidebarButtons', function ($scope, sidebarButtons) {
+app.controller('sidebarController', ['$scope', 'sidebarButtons', function ($scope, sidebarButtons) {
   $scope.sidebar = sidebarButtons.data[200];
   console.log(sidebarButtons.data);
 }]);
 
 
-/*app.run(['$http', function ($http) {
-  config.headers['Authorization'] = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3N2ExNjE2MzBhMWQ1MWE2NzQ2ZmQ5OSIsImVtYWlsIjoiZHlhbS5tYXJjYW5vQGdtYWlsLmNvbSIsImZpcnN0X25hbWUiOiJkeWFtIiwiZmlyc3Rfc3VybmFtZSI6Im1hcmNhbm8iLCJkZXBhcnRtZW50IjoiaXQiLCJyb2xlIjoxMDAsInN0YXR1cyI6ImFjdGl2ZSIsImV4cCI6MTQ2ODU2Nzc3MjE0OSwiaWF0IjoxNDY3OTYyOTcyfQ.1jXslDmDsoHXRl6q4B2w7rzSnQdbwCImiRF4yimVq1Y';
-  config.headers['Accept'] = 'application/json;odata=verbose';
-
+/*app.run(['$http', function (amMoment) {
+  amMoment.changeLocale('es');
 }]);*/
 
 /*app.factory('httpRequestInterceptor', function () {
@@ -134,7 +151,32 @@ app.config(function ($httpProvider) {
   $httpProvider.interceptors.push('httpRequestInterceptor');
 });*/
 
-app.controller('loginController', ['primus', '$scope', '$timeout', '$http', '$rootScope', '$location', '$httpParamSerializer', '$window', function (primus, $scope, $timeout, $http, $rootScope, $location, $httpParamSerializer, $window) {
+
+app.factory('UserService', function() {
+  var defaults = {
+    location: 'autoip'
+  };
+ 
+  var service = {
+    user: {},
+    save: function() {
+      sessionStorage.presently = angular.toJson(service.user);
+    },
+    restore: function() {
+      // Pull from sessionStorage
+      service.user = angular.fromJson(sessionStorage.presently) || defaults
+ 
+      return service.user;
+    }
+  };
+  // Immediately call restore from the session storage
+  // so we have our user data available immediately
+  service.restore();
+  return service;
+})
+
+
+app.controller('loginController', ['$scope', '$timeout', '$http', '$rootScope', 'OptionsController', function ($scope, $timeout, $http, $rootScope, OptionsController) {
 
   //$scope.messages = [];
 
@@ -202,7 +244,7 @@ app.controller('loginController', ['primus', '$scope', '$timeout', '$http', '$ro
 
   console.log($rootScope.contents);*/
 
-  this.parseJwt = function(token) {
+  /*this.parseJwt = function(token) {
     var base64Url = token.split('.')[1];
     var base64 = base64Url.replace('-', '+').replace('_', '/');
     return JSON.parse($window.atob(base64));
@@ -228,7 +270,7 @@ app.controller('loginController', ['primus', '$scope', '$timeout', '$http', '$ro
 
   this.logout = function() {
     $window.localStorage.removeItem('jwtToken');
-  }
+  }*/
 
   this.login = function(credentials) {
     return $http.post(API + '/api/login', {

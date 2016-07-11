@@ -1,3 +1,36 @@
+require('angular');
+require('moment');
+var _ = require('lodash');
+require('angular-moment');
+//require('');
+require('angular-chrome-messaging');
+BackgroundService = require('./app/background/services/BackgroundService');
+
+var app = angular.module('BackgroundApp', ['ChromeMessaging', 'angularMoment']);
+
+
+app.config(['ChromeMessagingProvider', function (ChromeMessagingProvider, $indexedDBProvider) {
+  $indexedDBProvider.connection('myIndexedDB')
+  $indexedDBProvider.upgradeDatabase(myVersion, function(event, db, tx) {
+  var objStore = db.createObjectStore('people', { keyPath: 'ssn' });
+    objStore.createIndex('name_idx', 'name', { unique: false });
+    objStore.createIndex('age_idx', 'age', { unique: false });
+  });
+
+  ChromeMessagingProvider.moduleName = 'ChromeMessaging';
+}]);
+
+
+app.run(function (ChromeMessaging, BackgroundService, amMoment) {
+  amMoment.changeLocale('es');
+  ChromeMessaging.publish('login', BackgroundService.login);
+  ChromeMessaging.publish('logout', BackgroundService.logout);
+});
+
+
+app.service('BackgroundService', BackgroundService);
+
+
 /**
  * @see https://developer.chrome.com/apps/app_runtime
  * @see https://developer.chrome.com/apps/app_window
@@ -14,6 +47,7 @@ chrome.app.runtime.onLaunched.addListener(function (launchData) {
     }
   });
 });
+
 
 /**
  * @see https://developer.chrome.com/extensions/messaging

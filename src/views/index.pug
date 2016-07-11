@@ -1,11 +1,11 @@
 doctype html
-html(ng-app='MainApp')
+html(ng-app='MainApp' ng-csp="")
   head
     meta(charset='utf-8')
-    link(rel='stylesheet', href='../styles/bootstrap.min.css')
-    link(rel='stylesheet', href='../styles/sweetalert.css')
-    link(rel='stylesheet', href='../styles/dashboard.min.css')
-    link(rel='stylesheet', href='../styles/font-awesome.min.css')
+    link(rel='stylesheet', href='../stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='../stylesheets/sweetalert.css')
+    link(rel='stylesheet', href='../stylesheets/dashboard.min.css')
+    link(rel='stylesheet', href='../stylesheets/font-awesome.min.css')
   body
     // index.html
     .wrapper
@@ -13,12 +13,12 @@ html(ng-app='MainApp')
       .main-panel
         div(ui-view='header')
         div(ui-view='content')
-    script(src='../javascripts/angular.min.js')
-    script(src='../javascripts/angular-ui-router.min.js')
-    script(src='../javascripts/ui-route-styles.js')
-    script(src='../javascripts/ui-bootstrap-tpls.min.js')
-    script(src='../javascripts/primus.io.js')
-    script(src='../javascripts/angular-primus.min.js')
-    script(src='../javascripts/SweetAlert.min.js')
-    script(src='../javascripts/sweetalert.min.js')
-    script(src='../javascripts/main.js')
+    //script(src='../javascripts/angular.min.js')
+    //script(src='../javascripts/angular-ui-router.min.js')
+    //script(src='../javascripts/ui-route-styles.js')
+    //script(src='../javascripts/ui-bootstrap-tpls.min.js')
+    //script(src='../javascripts/primus.io.js')
+    //script(src='../javascripts/angular-primus.min.js')
+    //script(src='../javascripts/SweetAlert.min.js')
+    //script(src='../javascripts/sweetalert.min.js')
+    script(src='../javascripts/main.bundle.js')

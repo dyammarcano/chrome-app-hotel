@@ -14,8 +14,7 @@
     "bower_components",
     "test"
   ],
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "dependencies": {
     "oclazyload": "^1.0.9",
     "angular-loading-bar": "^0.9.0",
@@ -23,7 +22,7 @@
     "angular-socket-io": "^0.7.0",
     "angular-ui-utils": "^3.0.0",
     "angular-sanitize": "^1.5.7",
-    "angular-ui-router": "^0.3.1",
+    "angular-ui-router": "#^0.2.13",
     "moment": "^2.13.0",
     "font-awesome": "fontawesome#^4.6.3",
     "roboto-fontface": "^0.5.0",
@@ -36,11 +35,14 @@
     "angular-touch": "^1.5.7",
     "angular-animate": "^1.5.7",
     "angular-bootstrap": "^1.3.3",
-    "angular-ui-router": "#^0.2.13",
     "bootstrap": "^3.3.6",
     "jquery": "#1.9.1",
     "ngSweetAlert": "angular-sweetalert#^1.1.0",
     "sweetalert": "^1.1.3",
-    "angular-moment": "^0.10.3"
+    "angular-moment": "^0.10.3",
+    "angular-momentjs": "^0.2.2",
+    "dibello": "^0.4.0",
+    "fakeLoader": "fakeloader#*",
+    "angular-jwt": "^0.0.9"
   }
 }
