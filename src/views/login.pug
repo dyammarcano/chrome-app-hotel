@@ -1,25 +1,25 @@
 // login.html
 #login
   .wellcome.text-uppercase
-    h1 {{ bigMessage }}
+    h1 {{ vm.bigMessage }}
   .group
     .box
       .mini
         img.img-circle(src='../images/login.jpg')
       .status
-        span(ng-class="{'label label-success': conectionStatus, 'label label-default': !conectionStatus}")
-          i(ng-class="{'fa fa-exchange': conectionStatus, 'fa fa-refresh fa-spin': !conectionStatus}")
-          |  {{ textStatus }}
-      form(name='myForm', ng-submit='login(credentials)', novalidate='')
+        span(ng-class="{'label label-success': vm.conectionStatus, 'label label-default': !vm.conectionStatus}")
+          i(ng-class="{'fa fa-exchange': vm.conectionStatus, 'fa fa-refresh fa-spin': !vm.conectionStatus}")
+          |  {{ vm.textStatus }}
+      form(name='myForm', ng-submit='vm.login(credentials)', novalidate='')
         .input-group
           span.input-group-addon
             i.fa.fa-envelope-o
-          input#email.form-control(type='email', ng-model='credentials.email', placeholder='{{ inputName }}', ng-required="'true'")
+          input#email.form-control(type='email', ng-model='credentials.email', placeholder='{{ vm.inputName }}', ng-required="'true'")
         .input-group
           span.input-group-addon
             i.fa.fa-key
-          input#password.form-control(type='password', ng-model='credentials.password', placeholder='{{ inputPass }}', ng-required="'true'")
+          input#password.form-control(type='password', ng-model='credentials.password', placeholder='{{ vm.inputPass }}', ng-required="'true'")
         .form-group
           button.btn.btn-default.btn-block.text-uppercase(type='submit', ng-disabled='!myForm.$valid')
-            i(ng-class="{'fa fa-sign-in': !linkConnect, 'fa fa-refresh fa-spin': linkConnect}")
-            |  {{ buttonText }}
+            i(ng-class="{'fa fa-sign-in': !vm.linkConnect, 'fa fa-refresh fa-spin': vm.linkConnect}")
+            |  {{ vm.buttonText }}

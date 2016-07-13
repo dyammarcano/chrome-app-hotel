@@ -4,12 +4,12 @@
   .sidebar-wrapper
     // <div class="logo"><a ui-sref="http://www.creative-tim.com" class="simple-text">Creative Tim</a></div>
     ul.nav
-      li(ui-sref-active='active', ng-repeat='item in sidebar')
+      li(ui-sref-active='active', ng-repeat='item in vm.sidebar')
         a(ui-sref='{{ item.url }}')
           i(class='{{ item.icon }}')
           p {{ item.name }}
         ul.nav
-          li(ui-sref-active='active', ng-repeat='sub in item.permisions')
+          li(ui-sref-active='active', ng-repeat='sub in vm.item.permisions')
             a(ui-sref='{{ sub.url }}')
               i(class='{{ sub.icon }}')
               p {{ sub.name }}

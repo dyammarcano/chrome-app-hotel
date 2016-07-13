@@ -157,6 +157,7 @@ gulp.task('copy', function() {
 gulp.task('background', function() {
   return browserify('./src/javascripts/background.js')
     .bundle()
+    //.pipe(uglify())
     .pipe(source('background.bundle.js'))
     .pipe(gulp.dest('./build/javascripts/'));
 });
@@ -165,6 +166,7 @@ gulp.task('background', function() {
 gulp.task('main', function() {
   return browserify('./src/javascripts/main.js')
     .bundle()
+    //.pipe(uglify())
     .pipe(source('main.bundle.js'))
     .pipe(gulp.dest('./build/javascripts/'));
 });
@@ -233,10 +235,10 @@ gulp.task('styles-dev', function() {
 //});
 
 
-/*gulp.task('cfg', function() {
+gulp.task('cfg', function() {
   gulp.src(paths.chrome)
     .pipe(gulp.dest('build'));
-});*/
+});
 
 
 /*gulp.task('js', ['background', 'main'], function() {

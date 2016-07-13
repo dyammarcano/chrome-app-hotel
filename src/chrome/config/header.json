@@ -1,5 +1,5 @@
 [{
   "name": "Salir",
-  "function": "logout()",
+  "url" : "logout()",
   "icon": "fa fa-sign-out"
 }]

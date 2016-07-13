@@ -46,7 +46,7 @@
     "icon": "fa fa-cog"
   }, {
     "name": "Cerrar Session",
-    "function": "logout()",
+    "url": "logout",
     "icon": "fa fa-sign-out"
   }],
   "200": [{
@@ -84,7 +84,7 @@
     "icon": "fa fa-clock-o"
   }, {
     "name": "Cerrar Session",
-    "function": "logout()",
+    "url": "logout",
     "icon": "fa fa-sign-out"
   }],
   "300": [{
@@ -138,7 +138,7 @@
     "icon": "fa fa-table"
   }, {
     "name": "Cerrar Session",
-    "function": "logout()",
+    "url" : "logout",
     "icon": "fa fa-sign-out"
   }]
 }

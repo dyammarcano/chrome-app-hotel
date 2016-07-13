@@ -6,54 +6,39 @@ require('angular-bootstrap');
 require('angular-ui-router');
 require('angular-moment');
 require('angular-chrome-messaging');
+//var OptionsController = require('./app/main/controllers/OptionsController');
 
-function OptionsController(ChromeBindings, ChromeMessaging) {
-  // Bind `ChromeMessagingExample.user` to `OptionsController.user`
-  this.user = {};
-  ChromeBindings.bindVariable('ChromeMessagingExample', 'user').to(this, 'user');
 
-  var vm = this;
-
-  vm.inputEmail = '';
-  vm.inputName = '';
-
-  vm.login = function () {
-    ChromeMessaging.callMethod('ChromeMessagingExample', 'login', {
-      email: vm.inputEmail,
-      name: vm.inputName
-    }).then(function (user) {
-      console.log('Logged in as:', user);
-    });
-  };
-}
-
-var app = angular.module('MainApp', ['ui.router', 'ui.bootstrap', 'oitozero.ngSweetAlert', 'angularMoment']);
+angular.module('MainApp', ['ui.router', 'ui.bootstrap', 'oitozero.ngSweetAlert', 'angularMoment']);
 
 //https://www.youtube.com/watch?v=BNtw6P77qpE
 //http://gohooey.com/demo/sidebar/bootstrapnavigation/hoedemo.html
 
-app.constant('API', 'http://192.168.1.50:3000');
+angular.module('MainApp').constant('API', 'http://192.168.1.50:3000');
 
 
-app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+angular.module('MainApp').config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
-  $urlRouterProvider.otherwise('/home');
+  $urlRouterProvider.otherwise('/dashboard');
 
-  //console.log(this);
+  $stateProvider.state('logout', {
+    template: 'redirecting',
+    controller: 'LogoutController as vm'
+  });
 
   $stateProvider.state('login', {
-    url:'/',
+    url:'/login',
     views: {
       'content': {
         templateUrl: 'login.html',
-        controller: 'loginController'
+        controller: 'loginController as vm'
       }
     }
   });
 
 
-  $stateProvider.state('home', {
-    url:'/home',
+  $stateProvider.state('dashboard', {
+    url:'/dashboard',
     resolve : {
       headerButtons: function ($http) {
         return $http.get('../config/header.json').then(
@@ -72,23 +57,23 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       'header': {
         //abstract: true,
         templateUrl: 'header.html',
-        controller: 'headerController',
+        controller: 'headerController as vm',
       },
       'content': {
         templateUrl: 'home.html',
-        controller: 'homeController',
+        controller: 'homeController as vm',
       },
       'sidebar': {
         //abstract: true,
         templateUrl: 'sidebar.html',
-        controller: 'sidebarController',
+        controller: 'sidebarController as vm',
       }
     }
   });
 
 
   $stateProvider.state('home.info', {
-    url:'/info',
+    url:'dashboard.info',
     resolve : {
       accountInfo: function ($http) {
         return $http.get(API + '/api/account/user').then(
@@ -101,43 +86,68 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       'header': {
         //abstract: true,
         templateUrl: 'header.html',
-        controller: 'headerController',
+        controller: 'headerController as vm',
       },
       'content': {
         templateUrl: 'home.html',
-        controller: 'homeController',
+        controller: 'homeController as vm',
       },
       'sidebar': {
         //abstract: true,
         templateUrl: 'sidebar.html',
-        controller: 'sidebarController',
+        controller: 'sidebarController as vm',
       }
     }
   });
-
 }]);
 
 
-app.controller('headerController', ['$scope', 'headerButtons', function ($scope, headerButtons) {
-  $scope.header  = headerButtons.data;
-  //console.log(headerButtons.data);
-}]);
-
-app.controller('homeController', ['$scope', function ($scope) {
-
-}]);
-
-app.controller('sidebarController', ['$scope', 'sidebarButtons', function ($scope, sidebarButtons) {
-  $scope.sidebar = sidebarButtons.data[200];
-  console.log(sidebarButtons.data);
+angular.module('MainApp').controller('LogoutController', ['$location', '$state', function ($location, $state) {
+  console.log("logout route");
+  alert($state);
+  $rootScope.isLoggedIn = false;
+  $location.url('/');
+  //$state.go('login', {}, { reload : true });
+  //$state.go($state.current, $stateParams, {reload: true, inherit: false});
 }]);
 
 
-/*app.run(['$http', function (amMoment) {
+angular.module('MainApp').controller('headerController', ['headerButtons', function (headerButtons) {
+  this.header  = headerButtons.data;
+
+  this.title = 'Panel de Control';
+
+  this.linkClicked = function(link) {
+    $location.path(link);
+  };
+
+  //console.log(this.header);
+
+  this.current = function () {
+    console.log("current");
+  };
+
+  this.logout = function () {
+    console.log("logout");
+  };
+}]);
+
+
+angular.module('MainApp').controller('sidebarController', ['sidebarButtons', function (sidebarButtons) {
+  this.sidebar = sidebarButtons.data[100];
+  console.log(this.sidebar);
+}]);
+
+angular.module('MainApp').controller('homeController', [function () {
+  // body...
+}]);
+
+
+/*angular.module('MainApp').run(['$http', function (amMoment) {
   amMoment.changeLocale('es');
 }]);*/
 
-/*app.factory('httpRequestInterceptor', function () {
+/*angular.module('MainApp').factory('httpRequestInterceptor', function () {
   return {
     request: function (config) {
       config.headers['Authorization'] = 'Basic d2VudHdvcnRobWFuOkNoYW5nZV9tZQ==';
@@ -147,17 +157,17 @@ app.controller('sidebarController', ['$scope', 'sidebarButtons', function ($scop
   };
 });
 
-app.config(function ($httpProvider) {
+angular.module('MainApp').config(function ($httpProvider) {
   $httpProvider.interceptors.push('httpRequestInterceptor');
 });*/
 
 
-app.factory('UserService', function() {
-  var defaults = {
+angular.module('MainApp').factory('UserService', function() {
+  this.defaults = {
     location: 'autoip'
   };
  
-  var service = {
+  this.service = {
     user: {},
     save: function() {
       sessionStorage.presently = angular.toJson(service.user);
@@ -173,61 +183,37 @@ app.factory('UserService', function() {
   // so we have our user data available immediately
   service.restore();
   return service;
-})
+});
 
 
-app.controller('loginController', ['$scope', '$timeout', '$http', '$rootScope', 'OptionsController', function ($scope, $timeout, $http, $rootScope, OptionsController) {
+angular.module('MainApp').controller('loginController', ['$location', '$timeout', '$http', '$rootScope', 'ChromeBindings', 'ChromeMessaging', function ($location, $timeout, $http, $rootScope, ChromeBindings, ChromeMessaging) {
+  this.messages = [];
 
-  //$scope.messages = [];
+  //this.conectionStatus = false;
+  this.textStatus = 'conectando';
 
-  //$scope.conectionStatus = false;
-  $scope.textStatus = 'conectando';
-
-  var client = primus.channel('client');
-
-  function check () {
-    client.send('check', { status: $scope.conectionStatus })
-    console.log('status:', $scope.textStatus)
-  }
-
-  var apiConnect = $timeout(check, 5000);
-  
-  client.on('check', function (spark) {
-    $scope.conectionStatus = true;
-    $scope.textStatus = 'conectado';
-    console.log('status:', $scope.textStatus);
-    $timeout.cancel(apiConnect);
-  });
-
-  client.on('close', function (spark) {
-    $scope.conectionStatus = false;
-    $scope.textStatus = 'conectando';
-    console.log('status:', $scope.textStatus);
-    var apiConnect = $timeout(check, 5000);
-  });
-
-  /*$scope.text = 'login part from controller';
-  $scope.date = {};
+  /*this.text = 'login part from controller';
+  this.date = {};
 
   var updateTime = function() {
-    $scope.date.raw = new Date();
+    this.date.raw = new Date();
     $timeout(updateTime, 1000);
   };
 
   updateTime();*/
 
   $rootScope.hideParticles = false;
-  $scope.buttonText = 'Ingresar';
-  $scope.inputName = 'Correo:';
-  $scope.inputPass = 'Contraseña:';
-  $scope.bigMessage = 'Hotel EuroBuilding Puerto Ordaz';
-  $scope.linkConnect = false;
+  this.buttonText = 'Ingresar';
+  this.inputName = 'Correo:';
+  this.inputPass = 'Contraseña:';
+  this.bigMessage = 'Hotel EuroBuilding Puerto Ordaz';
+  this.linkConnect = false;
 
-  /*$scope.statusSection = {
+  /*this.statusSection = {
     status: false
   }*/
 
-  $scope.credentials = {
+  this.credentials = {
     email: 'dyam.marcano@gmail.com',
     password: '0111100101101111'
   }
@@ -272,25 +258,31 @@ app.controller('loginController', ['$scope', '$timeout', '$http', '$rootScope', 
     $window.localStorage.removeItem('jwtToken');
   }*/
 
+  $rootScope.isLoggedIn = false;
+
   this.login = function(credentials) {
-    return $http.post(API + '/api/login', {
+
+    ChromeMessaging.callMethod('ChromeMessagingExample', 'login', {
       username: credentials.email,
       password: credentials.password
+    }).then(function (data) {
+      console.log('Logged in :', data);
+      this.isLoggedIn = data;
     });
-    $scope.buttonText = 'Verificando';
-    $scope.linkConnect = true;
+
+    this.buttonText = 'Verificando';
+    this.linkConnect = true;
 
     console.log(credentials);
 
-    client.send('auth', credentials);
-
-    client.on('auth', function (spark) {
-      console.log(spark);
-    });
-
     $timeout(function() {
-      $scope.buttonText = 'Ingresar';
-      $scope.linkConnect = false;
+
+      if ($rootScope.loggedIn === true) {
+        $location.url('/');
+      };
+
+      this.buttonText = 'Ingresar';
+      this.linkConnect = false;
       /*if (credentials.email === 'dyam.marcano@gmail.com' && credentials.password === 'admin') {
         $rootScope.user = $rootScope.user;
         $rootScope.loggedIn = true;
