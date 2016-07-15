@@ -1,0 +1,16 @@
+{
+  "buildOnSave": true,
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": false,
+    "target": "es5",
+    "noImplicitAny": true,
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "newLine": "LF"
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

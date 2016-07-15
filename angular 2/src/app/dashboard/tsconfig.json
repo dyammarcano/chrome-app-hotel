@@ -1,12 +1,1 @@
-{
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
-  },
-  "compileOnSave": false,
-  "atom": {
-    "rewriteTsconfig": false
-  }
-}
+{}

@@ -1,0 +1,24 @@
+
+<!-- login.html-->
+<div id="login">
+  <div class="wellcome text-uppercase">
+    <h1>{{ vm.bigMessage }}</h1>
+  </div>
+  <div class="group">
+    <div class="box">
+      <div class="mini"><img class="img-circle" src="../images/login.jpg"/></div>
+      <div class="status"><span ng-class="{'label label-success': vm.conectionStatus, 'label label-default': !vm.conectionStatus}"><i ng-class="{'fa fa-exchange': vm.conectionStatus, 'fa fa-refresh fa-spin': !vm.conectionStatus}"></i> {{ vm.textStatus }}</span></div>
+      <form name="myForm" ng-submit="vm.login(credentials)" novalidate="">
+        <div class="input-group"><span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+          <input class="form-control" id="email" type="email" ng-model="credentials.email" placeholder="{{ vm.inputName }}" ng-required="'true'"/>
+        </div>
+        <div class="input-group"><span class="input-group-addon"><i class="fa fa-key"></i></span>
+          <input class="form-control" id="password" type="password" ng-model="credentials.password" placeholder="{{ vm.inputPass }}" ng-required="'true'"/>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-default btn-block text-uppercase" type="submit" ng-disabled="!myForm.$valid"><i ng-class="{'fa fa-sign-in': !vm.linkConnect, 'fa fa-refresh fa-spin': vm.linkConnect}"></i> {{ vm.buttonText }}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

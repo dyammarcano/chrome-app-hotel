@@ -1,0 +1,144 @@
+{
+  "100": [{
+    "name": "Inicio",
+    "url" : "home",
+    "icon": "fa fa-tachometer"
+  }, {
+    "name": "Ver Informacion",
+    "url" : "admin.info",
+    "icon": "fa fa-info"
+  }, {
+    "name": "Todo el Personal",
+    "url" : "accounts.list",
+    "icon": "fa fa-users",
+    "permisions": [{
+      "name": "Agregar Personal",
+      "url" : "account.add",
+      "icon": "fa fa-user-plus"
+    }, {
+      "name": "Editar Personal",
+      "url" : "account.edit",
+      "icon": "fa fa-pencil"
+    }, {
+      "name": "Borrar Personal",
+      "url" : "account.delete",
+      "icon": "fa fa-trash-o"
+    }, {
+      "name": "Suspender Personal",
+      "url" : "account.suspend",
+      "icon": "fa fa-lock"
+    }, {
+      "name": "Reactivar Personal",
+      "url" : "account.activate",
+      "icon": "fa fa-unlock-alt"
+    }, {
+      "name": "Enrolar Huella",
+      "url" : "account.enroll",
+      "icon": "fa fa-hand-o-up"
+    }]
+  }, {
+    "name": "Manejar Horarios",
+    "url" : "account.schedules",
+    "icon": "fa fa-calendar"
+  }, {
+    "name": "Ajustes",
+    "url" : "system.settings",
+    "icon": "fa fa-cog"
+  }, {
+    "name": "Cerrar Session",
+    "url": "logout",
+    "icon": "fa fa-sign-out"
+  }],
+  "200": [{
+    "name": "Inicio",
+    "url" : "home",
+    "icon": "fa fa-tachometer"
+  }, {
+    "name": "Ver Informacion",
+    "url" : "admin.info",
+    "icon": "fa fa-info"
+  }, {
+    "name": "Listar Trabajadores",
+    "url" : "users.list",
+    "icon": "fa fa-users",
+    "permisions": [{
+      "name": "Suspender Trabajador",
+      "url" : "user.suspend",
+      "icon": "fa fa-lock"
+    }, {
+      "name": "Reactivar Trabajador",
+      "url" : "user.activate",
+      "icon": "fa fa-unlock-alt"
+    }, {
+      "name": "Ver Perfil",
+      "url" : "user.profile",
+      "icon": "fa fa-user"
+    }, {
+      "name": "Ver Horario",
+      "url" : "user.schedule",
+      "icon": "fa fa-calendar"
+    }]
+  }, {
+    "name": "Ver Horarios",
+    "url" : "users.schedules",
+    "icon": "fa fa-clock-o"
+  }, {
+    "name": "Cerrar Session",
+    "url": "logout",
+    "icon": "fa fa-sign-out"
+  }],
+  "300": [{
+    "name": "Inicio",
+    "url" : "home",
+    "icon": "fa fa-tachometer"
+  }, {
+    "name": "Ver Informacion",
+    "url" : "admin.info",
+    "icon": "fa fa-info"
+  }, {
+    "name": "Listar Trabajadores",
+    "url" : "users.list",
+    "icon": "fa fa-users",
+    "permisions": [{
+      "name": "Agregar Trabajador",
+      "url" : "user.add",
+      "icon": "fa fa-user-plus"
+    }, {
+      "name": "Editar Trabajador",
+      "url" : "user.edit",
+      "icon": "fa fa-pencil"
+    }, {
+      "name": "Borrar Trabajador",
+      "url" : "user.delete",
+      "icon": "fa fa-trash-o"
+    }, {
+      "name": "Suspender Trabajador",
+      "url" : "user.suspend",
+      "icon": "fa fa-lock"
+    }, {
+      "name": "Reactivar Trabajador",
+      "url" : "user.activate",
+      "icon": "fa fa-unlock-alt"
+    }, {
+      "name": "Ver Perfil",
+      "url" : "user.profile",
+      "icon": "fa fa-user"
+    }, {
+      "name": "Ver Horario",
+      "url" : "user.schedule",
+      "icon": "fa fa-calendar"
+    }]
+  }, {
+    "name": "Ver Horarios",
+    "url" : "users.schedules",
+    "icon": "fa fa-clock-o"
+  }, {
+    "name": "Exportar Tabla",
+    "url" : "users.export",
+    "icon": "fa fa-table"
+  }, {
+    "name": "Cerrar Session",
+    "url" : "logout",
+    "icon": "fa fa-sign-out"
+  }]
+}
