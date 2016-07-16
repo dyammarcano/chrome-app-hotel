@@ -1,5 +1,4 @@
 {
-  "buildOnSave": true,
   "compilerOptions": {
     "module": "commonjs",
     "declaration": false,
@@ -7,8 +6,7 @@
     "noImplicitAny": true,
     "removeComments": false,
     "preserveConstEnums": true,
-    "sourceMap": true,
-    "newLine": "LF"
+    "sourceMap": false
   },
   "exclude": [
     "node_modules"

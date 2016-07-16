@@ -2,12 +2,12 @@ import {Component} from '@angular/core';
 
 @Component({
   selector: 'App',
-  template: require('./hello.html')
+  template: require('./main.html')
 })
 export class Main {
-  public hello: string;
+  public text: string;
 
   constructor() {
-    this.hello = 'Start Dev!';
+    this.text = 'Start Dev!';
   }
 }
