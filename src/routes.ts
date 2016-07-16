@@ -2,7 +2,7 @@
 
 import {Component} from '@angular/core';
 import {ROUTER_DIRECTIVES, RouterConfig} from '@angular/router';
-import {Hello} from './app/hello';
+import {Main} from './app/main';
 
 @Component({
   selector: 'root',
@@ -15,6 +15,6 @@ export class Root {
 export const routes: RouterConfig = [
   {
     path: '',
-    component: Hello
+    component: Main
   }
 ];

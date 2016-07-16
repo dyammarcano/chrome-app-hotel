@@ -4,10 +4,10 @@ import {Component} from '@angular/core';
   selector: 'App',
   template: require('./hello.html')
 })
-export class Hello {
+export class Main {
   public hello: string;
 
   constructor() {
-    this.hello = 'Hello World!';
+    this.hello = 'Start Dev!';
   }
 }
