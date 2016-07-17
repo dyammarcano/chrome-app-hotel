@@ -26,6 +26,8 @@ var del         = require('del');
 //var stylint     = require('gulp-stylint');
 //var templateCache = require('gulp-angular-templatecache');
 
+
+
 var paths = {
   css:            'src/stylesheets/*.css',
   pug:            'src/views/**/*.pug',
@@ -147,7 +149,7 @@ gulp.task('copy', function() {
   gulp.src(paths.css)
     //.pipe(minifyCss())
     .pipe(gulp.dest(paths.build_styles));
-    
+
   gulp.src(roboto)
     //.pipe(minifyCss())
     .pipe(gulp.dest(paths.build_styles + '/roboto'));
@@ -209,7 +211,7 @@ gulp.task('pug', function() {
 gulp.task('styles', function() {
   /*gulp.src('build', { read: false })
     .pipe(clean());*/
-    
+
   gulp.src('src/stylesheets/dashboard.styl')
     .pipe(sourcemaps.init())
     .pipe(stylus({ compress: true, linenos: false }))
