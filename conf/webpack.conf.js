@@ -11,16 +11,16 @@ module.exports = {
       {
         test: /\.ts$/,
         exclude: /node_modules/,
-        loader: 'tslint'
-      }
+        loader: 'tslint',
+      },
     ],
 
     loaders: [
       {
         test: /.json$/,
         loaders: [
-          'json'
-        ]
+          'json',
+        ],
       },
       {
         test: /\.(css|styl|stylus)$/,
@@ -28,38 +28,38 @@ module.exports = {
           'style',
           'css',
           'stylus',
-          'postcss'
-        ]
+          'postcss',
+        ],
       },
       {
         test: /\.ts$/,
         exclude: /node_modules/,
         loaders: [
-          'ts'
-        ]
+          'ts',
+        ],
       },
       {
         test: /.html$/,
         loaders: [
-          'html'
-        ]
-      }
-    ]
+          'html',
+        ],
+      },
+    ],
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.NoErrorsPlugin(),
     new HtmlWebpackPlugin({
       template: conf.path.src('index.html'),
-      inject: true
-    })
+      inject: true,
+    }),
   ],
   postcss: () => [autoprefixer],
   debug: true,
   devtool: 'cheap-module-eval-source-map',
   output: {
     path: path.join(process.cwd(), conf.paths.tmp),
-    filename: 'index.js'
+    filename: 'index.js',
   },
   resolve: {
     extensions: [
@@ -67,14 +67,14 @@ module.exports = {
       '.webpack.js',
       '.web.js',
       '.js',
-      '.ts'
-    ]
+      '.ts',
+    ],
   },
   entry: `./${conf.path.src('index')}`,
   ts: {
-    configFileName: 'conf/ts.conf.json'
+    configFileName: 'conf/ts.conf.json',
   },
   tslint: {
-    configuration: require('../tslint.json')
-  }
+    configuration: require('../tslint.json'),
+  },
 };

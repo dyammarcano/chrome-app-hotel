@@ -4,9 +4,9 @@ module.exports = function () {
   return {
     server: {
       baseDir: [
-        conf.paths.dist
-      ]
+        conf.paths.dist,
+      ],
     },
-    open: false
+    open: false,
   };
 };

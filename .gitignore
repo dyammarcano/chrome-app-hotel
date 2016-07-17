@@ -3,6 +3,7 @@
 # compiled output
 /dist
 /tmp
+.tmp
 
 # dependencies
 /node_modules
@@ -11,6 +12,7 @@
 # IDEs and editors
 /.idea
 .project
+.push.sh
 .classpath
 *.launch
 .settings/

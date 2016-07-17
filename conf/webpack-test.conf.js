@@ -4,31 +4,31 @@ module.exports = {
       {
         test: /\.ts$/,
         exclude: /node_modules/,
-        loader: 'tslint'
-      }
+        loader: 'tslint',
+      },
     ],
 
     loaders: [
       {
         test: /.json$/,
         loaders: [
-          'json'
-        ]
+          'json',
+        ],
       },
       {
         test: /\.ts$/,
         exclude: /node_modules/,
         loaders: [
-          'ts'
-        ]
+          'ts',
+        ],
       },
       {
         test: /.html$/,
         loaders: [
-          'html'
-        ]
-      }
-    ]
+          'html',
+        ],
+      },
+    ],
   },
   plugins: [],
   debug: true,
@@ -39,13 +39,13 @@ module.exports = {
       '.webpack.js',
       '.web.js',
       '.js',
-      '.ts'
-    ]
+      '.ts',
+    ],
   },
   ts: {
-    configFileName: 'conf/ts.conf.json'
+    configFileName: 'conf/ts.conf.json',
   },
   tslint: {
-    configuration: require('../tslint.json')
-  }
+    configuration: require('../tslint.json'),
+  },
 };

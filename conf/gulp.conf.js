@@ -19,7 +19,7 @@ exports.paths = {
   dist: 'dist',
   tmp: '.tmp',
   e2e: 'e2e',
-  tasks: 'gulp_tasks'
+  tasks: 'tasks',
 };
 
 exports.path = {};

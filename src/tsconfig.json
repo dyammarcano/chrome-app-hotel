@@ -3,10 +3,12 @@
     "module": "commonjs",
     "declaration": false,
     "target": "es5",
-    "noImplicitAny": true,
     "removeComments": false,
     "preserveConstEnums": true,
-    "sourceMap": false
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": false
   },
   "exclude": [
     "node_modules"

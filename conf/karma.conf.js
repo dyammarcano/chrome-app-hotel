@@ -7,39 +7,39 @@ module.exports = function (config) {
     autoWatch: false,
     logLevel: 'INFO',
     junitReporter: {
-      outputDir: 'test-reports'
+      outputDir: 'test-reports',
     },
     browsers: [
-      'Chrome'
+      'Chrome',
     ],
     frameworks: [
-      'jasmine'
+      'jasmine',
     ],
     files: [
       'node_modules/es6-shim/es6-shim.js',
-      conf.path.src('index.spec.js')
+      conf.path.src('index.spec.js'),
     ],
     preprocessors: {
       [conf.path.src('index.spec.js')]: [
-        'webpack'
-      ]
+        'webpack',
+      ],
     },
     reporters: ['progress', 'coverage'],
     coverageReporter: {
       type: 'html',
-      dir: 'coverage/'
+      dir: 'coverage/',
     },
     webpack: require('./webpack-test.conf'),
     webpackMiddleware: {
-      noInfo: true
+      noInfo: true,
     },
     plugins: [
       require('karma-jasmine'),
       require('karma-junit-reporter'),
       require('karma-coverage'),
       require('karma-chrome-launcher'),
-      require('karma-webpack')
-    ]
+      require('karma-webpack'),
+    ],
   };
 
   config.set(configuration);

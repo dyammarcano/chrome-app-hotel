@@ -5,9 +5,9 @@ module.exports = function () {
     server: {
       baseDir: [
         conf.paths.tmp,
-        conf.paths.src
-      ]
+        conf.paths.src,
+      ],
     },
-    open: false
+    open: false,
   };
 };
