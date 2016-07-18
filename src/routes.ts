@@ -1,8 +1,10 @@
 /// <reference path="../typings/index.d.ts"/>
 
-import {Component} from '@angular/core';
-import {ROUTER_DIRECTIVES, RouterConfig} from '@angular/router';
-import {Main} from './app/main';
+import { Component } from '@angular/core';
+import { ROUTER_DIRECTIVES, RouterConfig } from '@angular/router';
+import { Main } from './app/main.component';
+import { Dashboard } from './app/dashboard.component';
+import { Login } from './app/login.component';
 
 @Component({
   selector: 'root',
@@ -16,5 +18,18 @@ export const routes: RouterConfig = [
   {
     path: '',
     component: Main
+  },
+  {
+    path: '',
+    redirectTo: '/dashboard',
+    pathMatch: 'full'
+  },
+  {
+    path: 'dashboard',
+    component: Dashboard
+  },
+  {
+    path: 'login',
+    component: Login
   }
 ];
